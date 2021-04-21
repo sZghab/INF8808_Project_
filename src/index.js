@@ -18,35 +18,28 @@ import * as d3Chromatic from 'd3-scale-chromatic'
  */
 
 (function(d3) {
-    let bounds
-    let svgSize
-    let graphSize
+    CreateMap()
+})(d3)
 
-    const margin = { top: 35, right: 200, bottom: 35, left: 200 }
 
-    const xScale = d3.scaleBand().padding(0.05)
-    const yScale = d3.scaleBand().padding(0.2)
-    const colorScale = d3.scaleSequential(d3Chromatic.interpolateYlGnBu)
-
+function CreateMap() {
     var map = quebec_map.initMap()
     var svg = d3.select(map.getPanes().overlayPane).append("svg"),
         g = svg.append("g").attr("class", "leaflet-zoom-hide");
 
-    d3.json('./step.geojson', d3.autoType).then(function(data) {
-        var color = quebec_map.colorScale()
-        quebec_map.addLegend(map, color)
-        quebec_map.drawCircles(data, map, color)
-    })
-
-
     d3.csv("region_dt_intensité.csv").then(function(data) {
+        var values = []
         var groupByRegion = d3.nest()
-            .key(function(d) { return d["RÉGION ADMINISTRATIVE"]; })
+            .key(function(d) { return d["MUNICIPALITÉ"]; })
             .rollup(function(v) { return d3.mean(v, function(d) { return d["intensité"]; }); })
             .entries(data);
+        groupByRegion.forEach((d) => values.push(d.value))
 
-        console.log(groupByRegion)
-        d3.json("quebec_regions.geojson").then(function(collection) {
+        var color = d3.scaleSequentialQuantile(d3.interpolateBlues)
+            .domain([d3.min(values), d3.max(values)]);
+
+
+        d3.json("municipalite.geojson").then(function(collection) {
 
             // control that shows state info on hover
             var info = L.control();
@@ -58,9 +51,9 @@ import * as d3Chromatic from 'd3-scale-chromatic'
             };
 
             info.update = function(props) {
-                this._div.innerHTML = '<h4>US Population Density</h4>' + (props ?
-                    '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>' :
-                    'Hover over a state');
+                this._div.innerHTML = '<h5>Municipalité</h5>' + (props ?
+                    '<b>' + props.Municipalite + '</b><br /><b> Intensité des débordements: </b>' + Number(getIntensite(props.Municipalite)).toFixed(2) :
+                    'Survolez une municipalité');
             };
 
             info.addTo(map);
@@ -68,35 +61,33 @@ import * as d3Chromatic from 'd3-scale-chromatic'
 
             // get color depending on population density value
             function getColor(d) {
-                var values = []
-                groupByRegion.forEach((d) => values.push(d.value))
-                var color = d3.scaleLinear()
-                    .domain(values)
-                    .range(["white", "blue"]);
-                return color(d)
-
+                return d > 813296 ? '#800026' :
+                    d > 609972 ? '#BD0026' :
+                    d > 406648 ? '#E31A1C' :
+                    d > 203324 ? '#FC4E2A' :
+                    d > 0 ? '#FD8D3C' :
+                    '#ccc';
             }
 
             function getIntensite(region) {
                 var result = []
                 groupByRegion.forEach((d) => {
-                    if (d.key === region) {
+                    if (d.key.includes(region)) {
                         result.push(d.value)
                     }
                 })
-                if (result == []) { return -1 }
+                if (result == []) { return NaN }
                 return result[0]
             }
 
             function style(feature) {
-                console.log(getIntensite(feature.properties["res_nm_reg"]))
                 return {
-                    weight: 2,
+                    weight: 0.5,
                     opacity: 1,
                     color: 'white',
                     dashArray: '3',
                     fillOpacity: 0.7,
-                    fillColor: getColor(getIntensite(feature.properties["res_nm_reg"]))
+                    fillColor: getColor(getIntensite(feature.properties.Municipalite))
                 };
             }
 
@@ -104,7 +95,7 @@ import * as d3Chromatic from 'd3-scale-chromatic'
                 var layer = e.target;
 
                 layer.setStyle({
-                    weight: 5,
+                    weight: 1,
                     color: '#666',
                     dashArray: '',
                     fillOpacity: 0.7
@@ -144,33 +135,28 @@ import * as d3Chromatic from 'd3-scale-chromatic'
             map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
 
 
-            var legend = L.control({ position: 'bottomright' });
+            var legend = L.control({ position: 'topright' });
 
             legend.onAdd = function(map) {
 
                 var div = L.DomUtil.create('div', 'info legend'),
-                    grades = [0, 10, 20, 50, 100, 200, 500, 1000],
-                    labels = [],
-                    from, to;
+                    grades = [Nan, 0, 203324, 406648, 609972, 813296];
 
+                // loop through our density intervals and generate a label with a colored square for each interval
                 for (var i = 0; i < grades.length; i++) {
-                    from = grades[i];
-                    to = grades[i + 1];
-
-                    labels.push(
-                        '<i style="background:' + getColor(from + 1) + '"></i> ' +
-                        from + (to ? '&ndash;' + to : '+'));
-                }
-
-                div.innerHTML = labels.join('<br>');
-                return div;
-            };
+                    div.innerHTML +=
+                        '<i style="background:' + color(grades[i]) + '"><div class="legend-text"> ' + grades[i] + '</div></i></br>'
+                };
+            }
 
             legend.addTo(map);
-
         });
     });
-
+    d3.json('./step.geojson', d3.autoType).then(function(data) {
+        var color = quebec_map.colorScale()
+        quebec_map.addLegend(map, color)
+        quebec_map.drawCircles(data, map, color)
+    })
     d3.csv('./volume.csv', d3.autoType).then(function(data) {
 
         data.forEach(function(d) {
@@ -476,5 +462,4 @@ import * as d3Chromatic from 'd3-scale-chromatic'
         }
 
     })
-
-})(d3)
+}

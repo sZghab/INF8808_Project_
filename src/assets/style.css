@@ -1,10 +1,31 @@
    .intro {
-       height: 90%;
+       height: 100%;
+   }
+   
+   header {
+       background-color: #fff;
+       padding: 10px 100px;
+       border-bottom: 2px solid #97939A;
+   }
+   
+   h1 {
+       color: #2A2B2E;
+       font-family: 'Roboto Slab', 'serif';
+       font-size: 30px;
+       margin: 0;
+       font-weight: normal;
+   }
+   
+   h2 {
+       color: #2A2B2E;
+       font-size: 15px;
+       font-family: 'Roboto Slab', 'serif';
+       font-weight: normal;
    }
    
    #map {
-       height: fill-parent;
-       width: 50%;
+       height: 80%;
+       width: 70%;
        margin: 5px;
    }
    
