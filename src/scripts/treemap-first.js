@@ -54,8 +54,13 @@ export function firstTreemap(data){
 
     var canvas = d3.select("#canvasTreemap")
                 //    .append("svg")
-                   .attr("width",1705)
-                   .attr("height",2000)
+                //    .attr("width",2000)
+                //    .attr("height",1700)
+                .attr("width", "75%")
+                .attr("height", "75%")
+
+    var width = parseInt(canvas.style("width"));
+    var height = parseInt(canvas.style("height"));
 
     let hierarchy = d3.hierarchy(data, 
         (node) => {
@@ -72,7 +77,7 @@ export function firstTreemap(data){
     )
 
     d3.treemap()
-        .size([1000,600])
+        .size([width,height]).padding(2).round(true)
         (hierarchy)
     
     let dataTiles = hierarchy.leaves()
@@ -86,7 +91,7 @@ export function firstTreemap(data){
                     return 'translate (' + data['x0'] + ', ' + data['y0'] +')'
                 })
 
-    
+    let tooltip = d3.select('#tooltip')
 
     block.append('rect')
         .attr('class', 'tile')
@@ -129,23 +134,41 @@ export function firstTreemap(data){
         .attr('height', (data) => {
             return data['y1'] - data['y0']
         })
+        .attr('stroke', 'black')
         // .attr("x",(data) => {
         //     return data['x0']
         // })
         // .attr("y",(data) => {
         //     return data['y0']
         // })
+        .on('mouseover', (data) => {
+            tooltip.transition()
+                    .style('visibility', 'visible')
+
+            let revenue = data['data']['value'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
+
+            tooltip.html(
+                revenue + 'm³ ' + '<hr />' + data['data']['name']
+            )
+
+            tooltip.attr('data-value', data['data']['value'])
+        })
+        .on('mouseout', (data) => {
+            tooltip.transition()
+                    .style('visibility', 'hidden')
+        })
+
 
     block.append('text')
+        .attr('x', 5)
+        .attr('y', 20)
+        // .attr("x", 3)
+        // .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
+        // .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
         .text((data) => {
-             return data['data']['name']
-        })
-        // .attr('x', 5)
-        // .attr('y', 20)
-        .attr("x",(data) => {
-            return data['x0']
-        })
-        .attr("y",(data) => {
-            return data['y0']
-        })
+            return data['data']['name']
+       })
+       .attr("text-anchor", "middle")
+       
   }

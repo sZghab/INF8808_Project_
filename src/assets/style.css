@@ -113,3 +113,21 @@
        background-color: white;
        margin: 5px;
    }
+   #tooltip{
+    visibility: hidden;
+    min-height: 160px;
+    width: 200px;
+    margin-top: 2px;
+    color: #1D1F20;
+    font-size: 24px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+#tooltip hr{
+    width: '80%';
+    color: #1D1F20;
+    background-color: #1D1F20;
+    height:1px;
+    border:none;
+}
