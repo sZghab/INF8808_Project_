@@ -1,16 +1,10 @@
 'use strict'
 
-import * as helper from './scripts/helper.js'
-import * as preproc from './scripts/preprocess.js'
-import * as viz from './scripts/viz.js'
-import * as legend from './scripts/legend.js'
-import * as hover from './scripts/hover.js'
-import * as util from './scripts/util.js'
-
 import * as quebec_map from './scripts/map'
-import * as bar_chart from './scripts/stack-bar'
-
-import * as d3Chromatic from 'd3-scale-chromatic'
+import * as first_treemap from './scripts/treemap-first'
+import * as heatmap from './scripts/heatmap'
+import * as piechart from './scripts/PieChart'
+import * as barchart from './scripts/bar1'
 
 /**
  * @file This file is the entry-point for the the code for TP3 for the course INF8808.
@@ -20,9 +14,17 @@ import * as d3Chromatic from 'd3-scale-chromatic'
 
 (function(d3) {
     CreateMap()
-        // bar_chart.CreateBar()
-        //CreateHeatmap()
+    heatmap.CreateHeatmap()
+    barchart.createBar()
+        //piechart.CreatePieChart()
 })(d3)
+
+function CreateTreemap() {
+
+    d3.json("data_treemap1.json").then(function(data) {
+        first_treemap.firstTreemap(data);
+    })
+}
 
 
 function CreateMap() {
@@ -37,8 +39,6 @@ function CreateMap() {
             .rollup(function(v) { return d3.mean(v, function(d) { return d["intensité"]; }); })
             .entries(data);
         groupByRegion.forEach((d) => values.push(d.value))
-
-        console.log(groupByRegion)
 
         var color = d3.scaleSequentialQuantile(d3.interpolateBlues)
             .domain([d3.min(values), d3.max(values)]);
@@ -471,200 +471,105 @@ function CreateMap() {
     })
 }
 
-function CreateHeatmap() {
 
-    d3.csv('riviere_intensite.csv').then(function(data) {
+// function CreatePieChart() {
 
-        var lPatchWidth = 200;
-        var itemSize = 22,
-            cellSize = itemSize - 3,
-            margin = { top: 50, right: 20, bottom: 120, left: 110 };
+//     function arcLabel() {
+//         const radius = (Math.min(width, height) / 2) * 0.8;
+//         return d3
+//             .arc()
+//             .innerRadius(radius)
+//             .outerRadius(radius);
+//     }
 
-        var data;
+//     pie = d3
+//         .pie()
+//         .padAngle(0.005)
+//         .sort(null)
+//         .value(d => d.value)
 
-        var width = 1000 - margin.right - margin.left,
-            height = 900 - margin.top - margin.bottom;
+//     radius = Math.min(width, height) / 2
 
-
-        var colorScale;
-
-        var colorHold = ["#781426", "#C76475", "#EF9FAE", "#ABDB92", "#77B75B", "#2E6E12"]
-        var colorLText = ["< -66%", "-66% to -33%", "-33% to 0%", "0% to 33%", "33% to 66%", "> 66%"]
-
-        function bandClassifier(val, multiplier) {
-            if (val >= 0) {
-                return (Math.floor((val * multiplier) / (.33 * multiplier)) + 1) > 3 ? 3 : Math.floor((val * multiplier) / (.33 * multiplier)) + 1
-            } else {
-                return (Math.floor((val * multiplier) / (.33 * multiplier))) < -3 ? -3 : Math.floor((val * multiplier) / (.33 * multiplier))
-            }
-        }
-
-        var invertcolors = 0;
-        // Inverting color scale
-        if (invertcolors) {
-            colorHold.reverse();
-        }
-
-        var x_elements = d3.set(data.map(function(item) { return item.year + "-" + item.month; })).values(),
-            y_elements = d3.set(data.map(function(item) { return item.river; })).values();
-
-        var xScale = d3.scaleBand()
-            .domain(x_elements)
-            .range([0, x_elements.length * itemSize])
-            .paddingInner(20).paddingOuter(cellSize / 2)
-
-        var xAxis = d3.axisBottom()
-            .scale(xScale)
-            .tickFormat(function(d) {
-                return d;
-            });
-
-        var yScale = d3.scaleBand()
-            .domain(y_elements)
-            .range([0, y_elements.length * itemSize])
-            .paddingInner(.2).paddingOuter(.2);
-
-        var yAxis = d3.axisLeft()
-            .scale(yScale)
-            .tickFormat(function(d) {
-                return d;
-            });
+//     function arc() {
+//         d3
+//             .arc()
+//             .innerRadius(function() {
+//                 if (chartType == 'Donut') {
+//                     return radius * 0.67;
+//                 } else {
+//                     return 0;
+//                 }
+//             })
+//             .outerRadius(Math.min(width, height) / 2 - 1)
+//     }
 
 
-        // // Finding the mean of the data
-        // var mean_t = mean(data.map(function(d) { return +d.intensité }));
+//     function color() {
+//         d3
+//             .scaleOrdinal()
+//             .domain(data.map(d => d.group))
+//             .range(
+//                 d3
+//                 .quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), data.length)
+//                 .reverse()
+//             )
+//     }
 
-        // //setting percentage change for value w.r.t average
-        // data.forEach(function(d) {
-        //     d.perChange = (d.intensité - mean_t) / mean_t
-        // })
+//     height = Math.min(width, 500)
+//     data = d3.json("data_treemap1.json").then(function(data) {
+//         // Define variables for this cell (one for each visual element you'll create)
+//         let arcs, svg;
 
-        // function exportToJsonFile(jsonData) {
-        //     let dataStr = JSON.stringify(jsonData);
-        //     let dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+//         arcs = pie(
+//             data.filter(d => {
+//                 if (census_year == 2019) {
+//                     return d.year_measured == 2019;
+//                 } else if (census_year == 2017) {
+//                     return d.year_measured == 2017;
+//                 }
+//             })
+//         );
 
-        //     let exportFileDefaultName = 'data.json';
+//         svg = d3.select("#canvasPie")
+//             .append("svg")
+//             .attr("viewBox", [-width / 2, -height / 2, width, height]);
 
-        //     let linkElement = document.createElement('a');
-        //     linkElement.setAttribute('href', dataUri);
-        //     linkElement.setAttribute('download', exportFileDefaultName);
-        //     linkElement.click();
-        // }
+//         svg
+//             .append("g")
+//             .attr("stroke", "white")
+//             .selectAll("path")
+//             .data(arcs)
+//             .join("path")
+//             .attr("fill", d => color(d.data.group))
+//             .attr("d", arc)
+//             .append("title")
+//             .text(d => `${d.data.group}: ${d.data.pop.toLocaleString()}`);
 
-        // exportToJsonFile(data)
+//         svg
+//             .append("g")
+//             .attr("font-family", "sans-serif")
+//             .attr("font-size", 12)
+//             .attr("text-anchor", "middle")
+//             .selectAll("text")
+//             .data(arcs)
+//             .join("text")
+//             .attr("transform", d => `translate(${arcLabel.centroid(d)})`)
+//             .call(text =>
+//                 text
+//                 .append("tspan")
+//                 .attr("y", "-0.4em")
+//                 .attr("font-weight", "bold")
+//                 .text(d => d.data.group)
+//             )
+//             .call(text =>
+//                 text
+//                 .filter(d => d.endAngle - d.startAngle > 0.25)
+//                 .append("tspan")
+//                 .attr("x", 0)
+//                 .attr("y", "0.7em")
+//                 .attr("fill-opacity", 0.7)
+//                 .text(d => d.data.pop.toLocaleString())
+//             );
 
-        colorScale = d3.scaleOrdinal()
-            .domain([-3, -2, -1, 1, 2, 3])
-            .range(colorHold);
-
-        var rootsvg = d3.select('.heatmap')
-            .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-        var svg = rootsvg.append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-        // tooltip
-        var tooltip = d3.select("body").append("div").style("width", "80px").style("height", "40px").style("background", "#C3B3E5")
-            .style("opacity", "1").style("position", "absolute").style("visibility", "hidden").style("box-shadow", "0px 0px 6px #7861A5").style("padding", "10px");
-        var toolval = tooltip.append("div");
-
-
-        var cells = svg.selectAll('rect')
-            .data(data)
-            .enter().append('g').append('rect')
-            .attr('class', 'cell')
-            .attr('width', cellSize)
-            .attr('height', cellSize)
-            .attr('y', function(d) { return yScale(d.river); })
-            .attr('x', function(d) { return xScale(d.dt) - cellSize / 2; })
-            .attr('fill', function(d) { return colorScale(bandClassifier(d.perChange, 100)); })
-            .attr("rx", 3)
-            .attr("ry", 3)
-            .on("mouseover", function(d) {
-                //d3.select(this).attr("fill","#655091");
-                d3.select(this).style("stroke", "orange").style("stroke-width", "3px")
-                d3.select(".trianglepointer").transition().delay(100).attr("transform", "translate(" + (-((lPatchWidth / colorScale.range().length) / 2 + (colorScale.domain().indexOf(bandClassifier(d.perChange, 100)) * (lPatchWidth / colorScale.range().length)))) + ",0)");
-
-                d3.select(".LegText").select("text").text(colorLText[colorScale.domain().indexOf(bandClassifier(d.perChange, 100))])
-
-
-            })
-            .on("mouseout", function() {
-                //d3.select(this).attr('fill', function(d) { return colorScale(window.bandClassifier(d.perChange,100));});
-                d3.select(this).style("stroke", "none");
-                tooltip.style("visibility", "hidden");
-            })
-            .on("mousemove", function(d) {
-                tooltip.style("visibility", "visible")
-                    .style("top", (d3.event.pageY - 30) + "px").style("left", (d3.event.pageX + 20) + "px");
-
-                console.log(d3.mouse(this)[0])
-                tooltip.select("div").html("<strong>" + d.product + "</strong><br/> " + (+d.value).toFixed(2))
-
-            })
-
-
-        svg.append("g")
-            .attr("class", "y axis")
-            .call(yAxis)
-            .selectAll('text')
-            .attr('font-weight', 'normal');
-
-        svg.append("g")
-            .attr("class", "x axis")
-            .attr("transform", "translate(0," + (y_elements.length * itemSize + cellSize / 2) + ")")
-            .call(xAxis)
-            .selectAll('text')
-            .attr('font-weight', 'normal')
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", "-.5em")
-            .attr("transform", function(d) {
-                return "rotate(-65)";
-            });
-
-        // Legends section
-
-
-        legends = svg.append("g").attr("class", "legends")
-            .attr("transform", "translate(" + ((width + margin.right) / 2 - lPatchWidth / 2 - margin.left / 2) + "," + (height + margin.bottom - 35 - 20) + ")");
-
-        // Legend traingle pointer generator
-        var symbolGenerator = d3.symbol()
-            .type(d3.symbolTriangle)
-            .size(64);
-
-        legends.append("g").attr("transform", "rotate(180)").append("g").attr("class", "trianglepointer")
-            .attr("transform", "translate(" + (-lPatchWidth / colorScale.range().length) / 2 + ")")
-            .append("path").attr("d", symbolGenerator());
-        //Legend Rectangels
-        legends.append("g").attr("class", "LegRect")
-            .attr("transform", "translate(0," + 15 + ")")
-            .selectAll("rect").data(colorScale.range()).enter()
-            .append("rect").attr("width", lPatchWidth / colorScale.range().length + "px").attr("height", "10px").attr("fill", function(d) { return d })
-            .attr("x", function(d, i) { return i * (lPatchWidth / colorScale.range().length) })
-
-        // legend text
-        legends.append("g").attr("class", "LegText")
-            .attr("transform", "translate(0,45)")
-            .append("text")
-            .attr("x", lPatchWidth / 2)
-            .attr('font-weight', 'normal')
-            .style("text-anchor", "middle")
-            .text(colorLText[0])
-
-        // Heading 
-        rootsvg.append("g")
-            .attr("transform", "translate(0,30)")
-            .append("text")
-            .attr("x", (width + margin.right + margin.left) / 2)
-            .attr('font-weight', 'bold')
-            .attr('font-size', '22px')
-            .attr('font-family', 'Segoe UI bold')
-            .style("text-anchor", "middle")
-            .text("Sales Heatmap")
-
-
-    });
-}
+//     })
+// }
