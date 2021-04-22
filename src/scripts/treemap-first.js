@@ -135,12 +135,7 @@ export function firstTreemap(data){
             return data['y1'] - data['y0']
         })
         .attr('stroke', 'black')
-        // .attr("x",(data) => {
-        //     return data['x0']
-        // })
-        // .attr("y",(data) => {
-        //     return data['y0']
-        // })
+
         .on('mouseover', (data) => {
             tooltip.transition()
                     .style('visibility', 'visible')
@@ -160,15 +155,15 @@ export function firstTreemap(data){
         })
 
 
-    block.append('text')
-        .attr('x', 5)
-        .attr('y', 20)
-        // .attr("x", 3)
-        // .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
-        // .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
-        .text((data) => {
-            return data['data']['name']
-       })
-       .attr("text-anchor", "middle")
+    // block.append('text')
+    //     .attr('x', 5)
+    //     .attr('y', 20)
+    //     // .attr("x", 3)
+    //     // .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
+    //     // .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
+    //     .text((data) => {
+    //         return data['data']['name']
+    //    })
+    //    .attr("text-anchor", "middle")
        
   }
