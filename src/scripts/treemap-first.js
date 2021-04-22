@@ -1,6 +1,6 @@
+import d3Legend from 'd3-svg-legend'
 
-
-export function firstTreemap(data){
+export function firstTreemap(data) {
 
     // var height = 500
     // var width = 500
@@ -19,7 +19,7 @@ export function firstTreemap(data){
     //     d3.root.sum(function(d) { console.log(d.value); })
     //     treemapp((root))
     //         console.log(treemapp)
-                               
+
     //     var cells = canvas.selectAll(".cell")
     //                       .data(root.descendants())
     //                     //   .data(treemapp)
@@ -45,19 +45,22 @@ export function firstTreemap(data){
     //     //     .attr("y", function(d){return d.y + d.dy / 2 })
     //     //     .attr("text-anchor", "middle")
     //     //     .text(function (d) {return d.children ? null : d.name})
-    
+
     // //**   })
 
-    
+
     // var color = d3.scaleOrdinal(d3.schemeCategory10)
     // color(data['parent']['value'])
 
     var canvas = d3.select("#canvasTreemap")
-                //    .append("svg")
-                   .attr("width",1705)
-                   .attr("height",2000)
+        .append("svg")
+        .attr("width", "700px")
+        .attr("height", "70%")
 
-    let hierarchy = d3.hierarchy(data, 
+    var width = parseInt(canvas.style("width"));
+    var height = parseInt(canvas.style("height"));
+
+    let hierarchy = d3.hierarchy(data,
         (node) => {
             return node['children']
         }
@@ -68,52 +71,58 @@ export function firstTreemap(data){
     ).sort(
         (node1, node2) => {
             return node2['value'] - node1['value']
-        } 
+        }
     )
 
     d3.treemap()
-        .size([1000,600])
+        .size([width - 120, height]).padding(2).round(true)
         (hierarchy)
-    
+
     let dataTiles = hierarchy.leaves()
-    console.log(dataTiles)
+        // console.log(dataTiles)
 
     let block = canvas.selectAll('g')
-                .data(dataTiles)
-                .enter()
-                .append('g')
-                .attr('transform', (data) => {
-                    return 'translate (' + data['x0'] + ', ' + data['y0'] +')'
-                })
+        .data(dataTiles)
+        .enter()
+        .append('g')
+        .attr('transform', (data) => {
+            return 'translate (' + data['x0'] + ', ' + data['y0'] + ')'
+        })
 
-    
+    canvas.append("g")
+        .attr("class", "legendSequential")
+        .attr("transform", "translate(" + (width - 120) + ", 20 )");
+
+    var color = d3.scaleOrdinal()
+        .domain(['Biofiltration', 'Boues activées', 'Disques biologiques', 'Dégrillage', 'Fosse septique', 'Étangs aérés', 'Étangs aérés à rétention réduite', 'Étangs non aérés', 'Physico-chimique'])
+        .range(d3.schemeSet2);
+
+    var legendSequential = d3Legend.legendColor()
+        .shapeWidth(30)
+        .cells(10)
+        .orient("vertical")
+        .scale(color)
+        .labelAlign('start')
+        .title('Légende')
+
+    canvas.select(".legendSequential")
+        .call(legendSequential);
+
+    var tooltip = d3.select("#canvasTreemap")
+        .append("div")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "1px")
+        .style("border-radius", "5px")
+        .style("padding", "10px")
+        .style("font-size", "15px")
+        .html("<p>I'm a tooltip written in HTML</p>");
 
     block.append('rect')
         .attr('class', 'tile')
-        .attr('fill', (data) => {
-            let category = data['parent']['data']['name']
-            if(category === 'Autres'){
-                return 'orange'
-            }else if(category === "Biofiltration"){
-                return 'lightgreen'
-            }else if(category === 'Boues activées'){
-                return 'crimson'
-            }else if(category === 'Disques biologiques'){
-                return 'steelblue'
-            }else if(category === 'Dégrillage'){
-                return 'pink'
-            }else if(category === 'Fosse septique'){
-                return 'khaki'
-            }else if(category === 'Étangs aérés'){
-                return 'green'
-            }else if(category === 'Étangs aérés à rétention réduite'){
-                return 'yellow'
-            }else if(category === 'Étangs non aérés'){
-                return 'grey'
-            }else if(category === 'Physico-chimique'){
-                return 'red'
-            }
-        })
+        .attr('fill', (d) => color(d.parent.data.name))
         .attr('child-name', (data) => {
             return data['data']['name']
         })
@@ -129,23 +138,42 @@ export function firstTreemap(data){
         .attr('height', (data) => {
             return data['y1'] - data['y0']
         })
-        // .attr("x",(data) => {
-        //     return data['x0']
-        // })
-        // .attr("y",(data) => {
-        //     return data['y0']
-        // })
+        .attr('stroke', 'white')
 
-    block.append('text')
-        .text((data) => {
-             return data['data']['name']
+    .on('mouseover', (data) => {
+            tooltip.transition()
+                .style('visibility', 'visible')
+
+            let revenue = data['data']['value'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
+
+            tooltip.html(
+                revenue + 'm³ ' + '<hr />' + data['data']['name']
+            )
+
+            tooltip.attr('data-value', data['data']['value'])
         })
-        // .attr('x', 5)
-        // .attr('y', 20)
-        .attr("x",(data) => {
-            return data['x0']
-        })
-        .attr("y",(data) => {
-            return data['y0']
-        })
-  }
+        .on("mousemove", function() { return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px"); })
+
+    .on('mouseout', (data) => {
+        tooltip.transition()
+            .style('visibility', 'hidden')
+    })
+
+
+    canvas.append("g")
+        .attr("class", "legendSequential")
+        .attr("transform", "translate(0,0)");
+
+    var legendSequential = d3Legend.legendColor()
+        .shapeWidth(30)
+        .cells(10)
+        .orient("vertical")
+        .scale(color)
+        .labelAlign('start')
+        .title('Légende')
+
+    canvas.select(".legendSequential")
+        .call(legendSequential);
+
+}

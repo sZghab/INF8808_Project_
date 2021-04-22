@@ -1,10 +1,13 @@
 'use strict'
+import d3Legend from 'd3-svg-legend'
 
 import * as quebec_map from './scripts/map'
 import * as first_treemap from './scripts/treemap-first'
 import * as heatmap from './scripts/heatmap'
 import * as piechart from './scripts/PieChart'
 import * as barchart from './scripts/bar1'
+import * as second_treemap from './scripts/treemap-second'
+import * as d3Chromatic from 'd3-scale-chromatic'
 
 /**
  * @file This file is the entry-point for the the code for TP3 for the course INF8808.
@@ -15,8 +18,11 @@ import * as barchart from './scripts/bar1'
 (function(d3) {
     CreateMap()
     heatmap.CreateHeatmap()
-    barchart.createBar()
+        //barchart.createBar()
+    CreateTreemap()
         //piechart.CreatePieChart()
+        //CreateTreemap_v2()
+    CreateBarchart()
 })(d3)
 
 function CreateTreemap() {
@@ -24,8 +30,11 @@ function CreateTreemap() {
     d3.json("data_treemap1.json").then(function(data) {
         first_treemap.firstTreemap(data);
     })
-}
 
+    d3.json("data_treemap2.json").then(function(data) {
+        second_treemap.secondTreemap(data);
+    })
+}
 
 function CreateMap() {
     var map = quebec_map.initMap()
@@ -63,15 +72,14 @@ function CreateMap() {
 
             info.addTo(map);
 
-
-            // get color depending on population density value
             function getColor(d) {
-                return d > 813296 ? '#800026' :
-                    d > 609972 ? '#BD0026' :
-                    d > 406648 ? '#E31A1C' :
-                    d > 203324 ? '#FC4E2A' :
-                    d > 0 ? '#FD8D3C' :
-                    '#ccc';
+                return d >= 600000 ? '#7a0172' :
+                    d > 450000 ? '# BD0026' :
+                    d > 300000 ? '#E31A1C' :
+                    d > 150000 ? '#FC4E2A' :
+                    d > 10000 ? '#FD8D3C' :
+                    d > 5000 ? '#FEB24C' :
+                    d > 0 ? '#FED976' : '#ccc';
             }
 
             function getIntensite(region) {
@@ -139,22 +147,22 @@ function CreateMap() {
 
             map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
 
-
-            var legend = L.control({ position: 'topright' });
+            var legend = L.control({ position: 'bottomleft' });
 
             legend.onAdd = function(map) {
-
                 var div = L.DomUtil.create('div', 'info legend'),
-                    grades = [Nan, 0, 203324, 406648, 609972, 813296];
-
-                // loop through our density intervals and generate a label with a colored square for each interval
+                    grades = ["NaN or 0", 5000, 10000, 150000, 300000, 450000, 600000];
+                div.innerHTML = "<h5> Intensité des surverses: </h5>"
+                    // loop through our density intervals and generate a label with a colored square for each interval
                 for (var i = 0; i < grades.length; i++) {
                     div.innerHTML +=
-                        '<i style="background:' + color(grades[i]) + '"><div class="legend-text"> ' + grades[i] + '</div></i></br>'
+                        '<i style="background:' + getColor(grades[i]) + '"><div class="legend-text"> ' + grades[i] + '</div></i></br>'
                 };
-            }
+                return div;
+            };
 
             legend.addTo(map);
+
         });
     });
 
@@ -185,11 +193,11 @@ function CreateMap() {
 
         var svg = d3.select("#metric-modal").append("svg")
             .attr("width", "100%")
-            .attr("height", "100%")
+            .attr("height", "70%")
         var width = parseInt(svg.style("width"));
         var height = parseInt(svg.style("height"));
         // sets margins for both charts
-        var focusChartMargin = { top: 20, right: 20, bottom: 170, left: 60 };
+        var focusChartMargin = { top: 50, right: 20, bottom: 170, left: 60 };
         var contextChartMargin = { top: 360, right: 20, bottom: 90, left: 60 };
 
         // width of both charts
@@ -338,7 +346,7 @@ function CreateMap() {
             .datum(tmp)
             .attr("class", "line")
             .attr("fill", "none")
-            .attr("stroke", "black")
+            .attr("stroke", "#0000FF")
             .attr("stroke-width", 1.5)
             .attr("d", lineFocus);
         context
@@ -430,7 +438,7 @@ function CreateMap() {
         // focus chart x label
         focus
             .append("text")
-            .attr("transform", "translate(" + chartWidth / 2 + " ," + (focusChartHeight + focusChartMargin.top + 25) + ")")
+            .attr("transform", "translate(" + chartWidth / 2 + " ," + (focusChartHeight + focusChartMargin.top + 5) + ")")
             .style("text-anchor", "middle")
             .style("font-size", "18px")
             .text("Date de débordement");
@@ -471,105 +479,148 @@ function CreateMap() {
     })
 }
 
+function CreateTreemap_v2() {
+    var color = d3.scaleOrdinal()
+        .domain(['Très petite', 'Petite', 'Moyenne', 'Grande', 'Très grande'])
+        .range(["#d0efff", "#2a9df4", "#187bcd", "#1167ba", "#03254c"]);
 
-// function CreatePieChart() {
+    var format = d3.format(",d")
+    var height = 500
+    var width = 500
 
-//     function arcLabel() {
-//         const radius = (Math.min(width, height) / 2) * 0.8;
-//         return d3
-//             .arc()
-//             .innerRadius(radius)
-//             .outerRadius(radius);
-//     }
+    var treemap = data => d3.treemap()
+        .tile(d3.treemapSquarify.ratio(1))
+        .size([width / Math.pow(10, 30).toFixed(2), height])
+        (d3.hierarchy(data)
+            .sum(d => d.value)
+            .sort((a, b) => b.value - a.value))
 
-//     pie = d3
-//         .pie()
-//         .padAngle(0.005)
-//         .sort(null)
-//         .value(d => d.value)
+    function entity(character) {
+        return `&#${character.charCodeAt(0).toString()};`;
+    }
 
-//     radius = Math.min(width, height) / 2
+    d3.json("data_treemap2.json").then(function(data) {
+        console.log(data)
+        const root = treemap(data);
+        const svg = d3.select("#canvasTreemap2").append("svg")
+            .attr("viewBox", [0, 0, width, height])
+            .style("font", "11px sans-serif");
 
-//     function arc() {
-//         d3
-//             .arc()
-//             .innerRadius(function() {
-//                 if (chartType == 'Donut') {
-//                     return radius * 0.67;
-//                 } else {
-//                     return 0;
-//                 }
-//             })
-//             .outerRadius(Math.min(width, height) / 2 - 1)
-//     }
+        const leaf = svg.selectAll("g")
+            .data(root.leaves())
+            .join("g")
+            .attr("transform", d => `translate(${Math.round(d.x0 *  Math.pow(10, 30).toFixed(2))},${Math.round(d.y0)})`);
+
+        leaf.append("title")
+            .text(d => `${d.ancestors().reverse().map(d => d.data.name.replace("Station d'épuration de", "")).join("/")}\n${format(d.value)}`);
+
+        leaf.append("rect")
+            .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
+            .attr("fill-opacity", 0.6)
+            .attr("width", d => Math.round(d.x1 * Math.pow(10, 30).toFixed(2)) - Math.round(d.x0 * Math.pow(10, 30).toFixed(2)) - 1)
+            .attr("height", d => Math.round(d.y1) - Math.round(d.y0) - 1);
+
+        leaf.append("clipPath")
+            .append("use")
+
+        leaf.append("text")
+            .selectAll("tspan")
+            .data(d => [d.data.name.replace("Station d'épuration de", "")].concat(format(d.value)))
+            .join("tspan")
+            .attr("x", 3)
+            .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
+            .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.9 : null)
+            .text(d => d);
+    })
+
+}
 
 
-//     function color() {
-//         d3
-//             .scaleOrdinal()
-//             .domain(data.map(d => d.group))
-//             .range(
-//                 d3
-//                 .quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), data.length)
-//                 .reverse()
-//             )
-//     }
+function CreateBarchart() {
+    d3.csv("stacked.csv").then(
+        function(data) {
+            // set the dimensions and margins of the graph
+            var margin = { top: 10, right: 30, bottom: 20, left: 50 },
+                width = 1500 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
 
-//     height = Math.min(width, 500)
-//     data = d3.json("data_treemap1.json").then(function(data) {
-//         // Define variables for this cell (one for each visual element you'll create)
-//         let arcs, svg;
+            // append the svg object to the body of the page
+            var svg = d3.select("#bar-chart")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+            // List of subgroups = header of the csv files = soil condition here
+            var subgroups = data.columns.slice(1)
 
-//         arcs = pie(
-//             data.filter(d => {
-//                 if (census_year == 2019) {
-//                     return d.year_measured == 2019;
-//                 } else if (census_year == 2017) {
-//                     return d.year_measured == 2017;
-//                 }
-//             })
-//         );
+            // List of groups = species here = value of the first column called group -> I show them on the X axis
+            var groups = d3.map(data, function(d) { return (d.Group) }).keys()
 
-//         svg = d3.select("#canvasPie")
-//             .append("svg")
-//             .attr("viewBox", [-width / 2, -height / 2, width, height]);
+            // Add X axis
+            var x = d3.scaleBand()
+                .domain(groups)
+                .range([0, 1300])
+                .padding([0.2])
 
-//         svg
-//             .append("g")
-//             .attr("stroke", "white")
-//             .selectAll("path")
-//             .data(arcs)
-//             .join("path")
-//             .attr("fill", d => color(d.data.group))
-//             .attr("d", arc)
-//             .append("title")
-//             .text(d => `${d.data.group}: ${d.data.pop.toLocaleString()}`);
+            svg.append("g")
+                .attr("transform", "translate(20," + (height - 20) + ")")
+                .call(d3.axisBottom(x).tickSizeOuter(0))
+                .attr("class", "x")
+            svg.selectAll(".tick text").attr("transform", "rotate(-45) translate(-20,0)")
+                // Add Y axis
+            var y = d3.scaleLinear()
+                .domain([0, 10000000])
+                .range([height, 0]);
 
-//         svg
-//             .append("g")
-//             .attr("font-family", "sans-serif")
-//             .attr("font-size", 12)
-//             .attr("text-anchor", "middle")
-//             .selectAll("text")
-//             .data(arcs)
-//             .join("text")
-//             .attr("transform", d => `translate(${arcLabel.centroid(d)})`)
-//             .call(text =>
-//                 text
-//                 .append("tspan")
-//                 .attr("y", "-0.4em")
-//                 .attr("font-weight", "bold")
-//                 .text(d => d.data.group)
-//             )
-//             .call(text =>
-//                 text
-//                 .filter(d => d.endAngle - d.startAngle > 0.25)
-//                 .append("tspan")
-//                 .attr("x", 0)
-//                 .attr("y", "0.7em")
-//                 .attr("fill-opacity", 0.7)
-//                 .text(d => d.data.pop.toLocaleString())
-//             );
+            svg.append("g")
+                .call(d3.axisLeft(y))
+                .attr("transform", "translate(20,-20)")
+                .attr("width", 100);
 
-//     })
-// }
+            // color palette = one color per subgroup
+            var color = d3.scaleOrdinal()
+                .domain(subgroups)
+                .range(d3.schemeTableau10)
+
+            //stack the data? --> stack per subgroup
+            var stackedData = d3.stack()
+                .keys(subgroups)
+                (data)
+
+            // Show the bars
+            svg.append("g")
+                .selectAll("g")
+                // Enter in the stack data = loop key per key = group per group
+                .data(stackedData)
+                .enter().append("g")
+                .attr("fill", function(d) { return color(d.key); })
+                .selectAll("rect")
+                // enter a second time = loop subgroup per subgroup to add all rectangles
+                .data(function(d) { return d; })
+                .enter().append("rect")
+                .attr("x", function(d) { return x(d.data.Group); })
+                .attr("y", function(d) { return y(d[1]); })
+                .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+                .attr("width", x.bandwidth())
+                .attr("transform", "translate(20,-20)")
+
+            svg.append("g")
+                .attr("class", "legendSequential")
+                .attr("transform", "translate(1200,5)");
+
+            var legendSequential = d3Legend.legendColor()
+                .shapeWidth(30)
+                .cells(10)
+                .orient("vertical")
+                .scale(color)
+                .labelAlign('start')
+                .title('Légende')
+
+            svg.select(".legendSequential")
+                .call(legendSequential);
+
+        })
+
+}

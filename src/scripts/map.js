@@ -17,19 +17,19 @@ export function colorScale() {
     /* Scale */
     var color = d3.scaleOrdinal()
         .domain(['Très petite', 'Petite', 'Moyenne', 'Grande', 'Très grande'])
-        .range(["#ffffb2", "#fecc5c", "#fd8d3c", "#f03b20", "#bd0026"]);
+        .range(["#d0efff", "#2a9df4", "#187bcd", "#1167ba", "#03254c"]);
     return color
 }
 
 export function addLegend(map, color) {
-    var legend = L.control({ position: 'bottomright' });
+    var legend = L.control({ position: 'bottomleft' });
 
     legend.onAdd = function(map) {
 
         var div = L.DomUtil.create('div', 'info legend'),
             grades = ['Très petite', 'Petite', 'Moyenne', 'Grande', 'Très grande'];
-
-        // loop through our density intervals and generate a label with a colored square for each interval
+        div.innerHTML = "<h5> Taille des stations: </h5>"
+            // loop through our density intervals and generate a label with a colored square for each interval
         for (var i = 0; i < grades.length; i++) {
             div.innerHTML +=
                 '<i style="background:' + color(grades[i]) + '"><div class="legend-text"> ' + grades[i] + '</div></i></br>'
@@ -90,7 +90,6 @@ export function drawCircles(data, map, color) {
                 .duration('150') //how long we are transitioning between the two states (works like keyframes)
                 .attr("fill", "red") //change the fill
                 .attr('r', 10) //change radius
-            console.log(d)
             var html = "<div style='width: 250px;'> <h3 class='data-label'> Station d'épuration </h3> <div class='step-label'>" + d.properties.name_step.replace("Station d'épuration de ", "").replace("Station d'épuration d'", "") +
                 "</div> <div style='padding:0; margin-top:5px; margin-left:2px;'> <b> Lac principal: </b>" + d.properties.lac +
                 "</div><div style='padding:0; margin-top:5px; margin-left:2px;'> <b> Bassin principal: </b>" + d.properties.nom_bassin + "</div><div class='line'> </div>" + "<div style='display: flex; flex-wrap: wrap;'>" +
@@ -140,7 +139,6 @@ export function drawCircles(data, map, color) {
 
     function chart(d) {
 
-        console.log(d)
         var feature = d;
         var data = feature.properties;
 

@@ -1,0 +1,1006 @@
+{
+    "name": "flare",
+    "children": [
+        {
+            "name": "Grande",
+            "children": [
+                {
+                    "value": 178901.0,
+                    "name": "Station d'épuration d'Alma"
+                },
+                {
+                    "value": 47700.0,
+                    "name": "Station d'épuration de Blainville-Sainte-Thérèse"
+                },
+                {
+                    "value": 51913.0,
+                    "name": "Station d'épuration de Boisbriand"
+                },
+                {
+                    "value": 327974.0,
+                    "name": "Station d'épuration de Chambly"
+                },
+                {
+                    "value": 79938.0,
+                    "name": "Station d'épuration de Crabtree"
+                },
+                {
+                    "value": 155192.0,
+                    "name": "Station d'épuration de Lévis (Saint-Nicolas)"
+                },
+                {
+                    "value": 956498.0,
+                    "name": "Station d'épuration de Lévis (station Desjardins)"
+                },
+                {
+                    "value": 336.0,
+                    "name": "Station d'épuration de Mascouche (Terrebonne)"
+                },
+                {
+                    "value": 25469.0,
+                    "name": "Station d'épuration de Repentigny"
+                },
+                {
+                    "value": 31732.0,
+                    "name": "Station d'épuration de Rimouski"
+                },
+                {
+                    "value": 22746.0,
+                    "name": "Station d'épuration de Rosemère (Lorraine)"
+                },
+                {
+                    "value": 7362.0,
+                    "name": "Station d'épuration de Saguenay (Chicoutimi)"
+                },
+                {
+                    "value": 224901.0,
+                    "name": "Station d'épuration de Saguenay (Jonquière)"
+                },
+                {
+                    "value": 111640.0,
+                    "name": "Station d'épuration de Saint-Bruno-Saint-Basile-le-Grand"
+                },
+                {
+                    "value": 189790.0,
+                    "name": "Station d'épuration de Saint-Eustache"
+                },
+                {
+                    "value": 3971050.0,
+                    "name": "Station d'épuration de Shawinigan"
+                },
+                {
+                    "value": 289832.0,
+                    "name": "Station d'épuration de Terrebonne"
+                },
+                {
+                    "value": 46388319.0,
+                    "name": "Station d'épuration de Victoriaville"
+                }
+            ]
+        },
+        {
+            "name": "Moyenne",
+            "children": [
+                {
+                    "value": 8545.0,
+                    "name": "Station d'épuration d'Amqui"
+                },
+                {
+                    "value": 25340.0,
+                    "name": "Station d'épuration d'Asbestos"
+                },
+                {
+                    "value": 10627.0,
+                    "name": "Station d'épuration d'East Angus"
+                },
+                {
+                    "value": 8.0,
+                    "name": "Station d'épuration d'Huntingdon"
+                },
+                {
+                    "value": 21809.0,
+                    "name": "Station d'épuration de Baie-Comeau (Mingan)"
+                },
+                {
+                    "value": 42212.0,
+                    "name": "Station d'épuration de Beauceville"
+                },
+                {
+                    "value": 5281374.0,
+                    "name": "Station d'épuration de Beauharnois"
+                },
+                {
+                    "value": 2.0,
+                    "name": "Station d'épuration de Boischâtel-L'A.-Gardien-Ch.-Richer"
+                },
+                {
+                    "value": 1311.0,
+                    "name": "Station d'épuration de Bromont"
+                },
+                {
+                    "value": 10383.0,
+                    "name": "Station d'épuration de Carignan"
+                },
+                {
+                    "value": 181385.0,
+                    "name": "Station d'épuration de Chibougamau"
+                },
+                {
+                    "value": 10356254.0,
+                    "name": "Station d'épuration de Coteau-du-Lac"
+                },
+                {
+                    "value": 366.0,
+                    "name": "Station d'épuration de Gaspé"
+                },
+                {
+                    "value": 5550.0,
+                    "name": "Station d'épuration de Gatineau (Masson-Angers)"
+                },
+                {
+                    "value": 28332.0,
+                    "name": "Station d'épuration de Grande-Rivière"
+                },
+                {
+                    "value": 707.0,
+                    "name": "Station d'épuration de L'Assomption"
+                },
+                {
+                    "value": 107187.0,
+                    "name": "Station d'épuration de L'Île-Perrot"
+                },
+                {
+                    "value": 4900.0,
+                    "name": "Station d'épuration de La Pocatière"
+                },
+                {
+                    "value": 309995.0,
+                    "name": "Station d'épuration de La Sarre"
+                },
+                {
+                    "value": 255435.0,
+                    "name": "Station d'épuration de Lac-Mégantic"
+                },
+                {
+                    "value": 1883213.0,
+                    "name": "Station d'épuration de Lavaltrie"
+                },
+                {
+                    "value": 3005.0,
+                    "name": "Station d'épuration de Laverlochère"
+                },
+                {
+                    "value": 6473.0,
+                    "name": "Station d'épuration de Lévis (Saint-Jean)"
+                },
+                {
+                    "value": 33794.0,
+                    "name": "Station d'épuration de Lévis (Saint-Étienne)"
+                },
+                {
+                    "value": 175309.0,
+                    "name": "Station d'épuration de Magog"
+                },
+                {
+                    "value": 47.0,
+                    "name": "Station d'épuration de Marieville"
+                },
+                {
+                    "value": 76.0,
+                    "name": "Station d'épuration de Massueville"
+                },
+                {
+                    "value": 180.0,
+                    "name": "Station d'épuration de Matane"
+                },
+                {
+                    "value": 75.0,
+                    "name": "Station d'épuration de Melocheville (Beauharnois)"
+                },
+                {
+                    "value": 2235.0,
+                    "name": "Station d'épuration de Mercier"
+                },
+                {
+                    "value": 529.0,
+                    "name": "Station d'épuration de Mirabel (St-Canut)"
+                },
+                {
+                    "value": 2247.0,
+                    "name": "Station d'épuration de Mont-Tremblant (Saint-Jovite)"
+                },
+                {
+                    "value": 800.0,
+                    "name": "Station d'épuration de Montmagny"
+                },
+                {
+                    "value": 23391.0,
+                    "name": "Station d'épuration de Montréal (Île Notre-Dame)"
+                },
+                {
+                    "value": 10946.0,
+                    "name": "Station d'épuration de Napierville (Saint-Cyprien)"
+                },
+                {
+                    "value": 262.0,
+                    "name": "Station d'épuration de New Richmond"
+                },
+                {
+                    "value": 790832.0,
+                    "name": "Station d'épuration de Notre-Dame-de-l'Île-Perrot"
+                },
+                {
+                    "value": 229.0,
+                    "name": "Station d'épuration de Plessisville"
+                },
+                {
+                    "value": 41260.0,
+                    "name": "Station d'épuration de Repentigny (Le Gardeur)"
+                },
+                {
+                    "value": 79.0,
+                    "name": "Station d'épuration de Richmond"
+                },
+                {
+                    "value": 47.0,
+                    "name": "Station d'épuration de Rivière-du-Loup"
+                },
+                {
+                    "value": 488845.0,
+                    "name": "Station d'épuration de Roberval"
+                },
+                {
+                    "value": 30631.0,
+                    "name": "Station d'épuration de Rouyn-Noranda"
+                },
+                {
+                    "value": 35262.0,
+                    "name": "Station d'épuration de Saint-Agapit"
+                },
+                {
+                    "value": 43742.0,
+                    "name": "Station d'épuration de Saint-Cyrille-de-Wendover"
+                },
+                {
+                    "value": 7569.0,
+                    "name": "Station d'épuration de Saint-Césaire"
+                },
+                {
+                    "value": 2967.0,
+                    "name": "Station d'épuration de Saint-Côme-Linière"
+                },
+                {
+                    "value": 250966.0,
+                    "name": "Station d'épuration de Saint-Félicien"
+                },
+                {
+                    "value": 140.0,
+                    "name": "Station d'épuration de Saint-Germain-de-Grantham"
+                },
+                {
+                    "value": 1932.0,
+                    "name": "Station d'épuration de Saint-Guillaume"
+                },
+                {
+                    "value": 4500.0,
+                    "name": "Station d'épuration de Saint-Lazare"
+                },
+                {
+                    "value": 2860.0,
+                    "name": "Station d'épuration de Saint-Prime"
+                },
+                {
+                    "value": 18309.0,
+                    "name": "Station d'épuration de Saint-Raymond"
+                },
+                {
+                    "value": 64204.0,
+                    "name": "Station d'épuration de Saint-Rémi"
+                },
+                {
+                    "value": 500.0,
+                    "name": "Station d'épuration de Saint-Sauveur"
+                },
+                {
+                    "value": 6.0,
+                    "name": "Station d'épuration de Saint-Victor"
+                },
+                {
+                    "value": 36186.0,
+                    "name": "Station d'épuration de Saint-Zotique"
+                },
+                {
+                    "value": 1924839.0,
+                    "name": "Station d'épuration de Sainte-Agathe-des-Monts"
+                },
+                {
+                    "value": 10540.0,
+                    "name": "Station d'épuration de Sainte-Claire"
+                },
+                {
+                    "value": 46069.0,
+                    "name": "Station d'épuration de Sainte-Julie"
+                },
+                {
+                    "value": 3000.0,
+                    "name": "Station d'épuration de Sainte-Marie"
+                },
+                {
+                    "value": 2.0,
+                    "name": "Station d'épuration de Sainte-Perpétue"
+                },
+                {
+                    "value": 742537.0,
+                    "name": "Station d'épuration de Shawinigan (Grand-Mère)"
+                },
+                {
+                    "value": 734823.0,
+                    "name": "Station d'épuration de Shawinigan-Sud"
+                },
+                {
+                    "value": 13688.0,
+                    "name": "Station d'épuration de Sherbrooke (Rock Forest)"
+                },
+                {
+                    "value": 3823.0,
+                    "name": "Station d'épuration de Terrebonne (La Plaine)"
+                },
+                {
+                    "value": 68.0,
+                    "name": "Station d'épuration de Trois-Pistoles"
+                },
+                {
+                    "value": 22390.0,
+                    "name": "Station d'épuration de Témiscaming (Tembec)"
+                },
+                {
+                    "value": 200.0,
+                    "name": "Station d'épuration de Varennes"
+                },
+                {
+                    "value": 1059.0,
+                    "name": "Station d'épuration de Venise-en-Québec"
+                },
+                {
+                    "value": 130559.0,
+                    "name": "Station d'épuration de Verchères"
+                },
+                {
+                    "value": 12402.0,
+                    "name": "Station d'épuration de Warwick"
+                },
+                {
+                    "value": 35.0,
+                    "name": "Station d'épuration de Windsor"
+                },
+                {
+                    "value": 1000.0,
+                    "name": "Station d'épuration de l'Épiphanie (V)"
+                }
+            ]
+        },
+        {
+            "name": "Petite",
+            "children": [
+                {
+                    "value": 1360.0,
+                    "name": "Station d'épuration Les Îles (Cap-aux-Meules)"
+                },
+                {
+                    "value": 2811.0,
+                    "name": "Station d'épuration d'Ange-Gardien"
+                },
+                {
+                    "value": 650.0,
+                    "name": "Station d'épuration d'Armagh "
+                },
+                {
+                    "value": 304.0,
+                    "name": "Station d'épuration d'Henryville"
+                },
+                {
+                    "value": 3.0,
+                    "name": "Station d'épuration de Beaulac"
+                },
+                {
+                    "value": 35.0,
+                    "name": "Station d'épuration de Campbell's Bay"
+                },
+                {
+                    "value": 6380.0,
+                    "name": "Station d'épuration de Cap-Saint-Ignace"
+                },
+                {
+                    "value": 7545.0,
+                    "name": "Station d'épuration de Cap-Santé"
+                },
+                {
+                    "value": 3887.0,
+                    "name": "Station d'épuration de Chelsea"
+                },
+                {
+                    "value": 158.0,
+                    "name": "Station d'épuration de Cookshire-Eaton (Cookshire)"
+                },
+                {
+                    "value": 2109.0,
+                    "name": "Station d'épuration de Desbiens (Chambord)"
+                },
+                {
+                    "value": 2529.0,
+                    "name": "Station d'épuration de Fermont"
+                },
+                {
+                    "value": 50792.0,
+                    "name": "Station d'épuration de Grand-Saint-Esprit"
+                },
+                {
+                    "value": 1.0,
+                    "name": "Station d'épuration de Grande-Vallée"
+                },
+                {
+                    "value": 6845.0,
+                    "name": "Station d'épuration de Howick"
+                },
+                {
+                    "value": 55445.0,
+                    "name": "Station d'épuration de L'Islet"
+                },
+                {
+                    "value": 42792.0,
+                    "name": "Station d'épuration de La Doré"
+                },
+                {
+                    "value": 3.0,
+                    "name": "Station d'épuration de La Durantaye"
+                },
+                {
+                    "value": 33.0,
+                    "name": "Station d'épuration de Lac-Etchemin"
+                },
+                {
+                    "value": 5677.0,
+                    "name": "Station d'épuration de Laurier-Station"
+                },
+                {
+                    "value": 1444.0,
+                    "name": "Station d'épuration de Lebel-sur-Quévillon"
+                },
+                {
+                    "value": 2377.0,
+                    "name": "Station d'épuration de Lévis (Breakeyville)"
+                },
+                {
+                    "value": 11022.0,
+                    "name": "Station d'épuration de Macamic"
+                },
+                {
+                    "value": 322295.0,
+                    "name": "Station d'épuration de Magog (Omerville)"
+                },
+                {
+                    "value": 1000.0,
+                    "name": "Station d'épuration de Manseau"
+                },
+                {
+                    "value": 236736.0,
+                    "name": "Station d'épuration de Marsoui"
+                },
+                {
+                    "value": 2369.0,
+                    "name": "Station d'épuration de Maskinongé"
+                },
+                {
+                    "value": 2787.0,
+                    "name": "Station d'épuration de Mont-Tremblant (Village)"
+                },
+                {
+                    "value": 35.0,
+                    "name": "Station d'épuration de Métis-sur-Mer"
+                },
+                {
+                    "value": 8550.0,
+                    "name": "Station d'épuration de Normandin"
+                },
+                {
+                    "value": 20.0,
+                    "name": "Station d'épuration de Notre-Dame-Auxiliatrice-de-Buckland"
+                },
+                {
+                    "value": 1400.0,
+                    "name": "Station d'épuration de Notre-Dame-des-Pins"
+                },
+                {
+                    "value": 15.0,
+                    "name": "Station d'épuration de Notre-Dame-du-Bon-Conseil"
+                },
+                {
+                    "value": 1150.0,
+                    "name": "Station d'épuration de Orford"
+                },
+                {
+                    "value": 982.0,
+                    "name": "Station d'épuration de Palmarolle"
+                },
+                {
+                    "value": 681.0,
+                    "name": "Station d'épuration de Pohénégamook"
+                },
+                {
+                    "value": 26.0,
+                    "name": "Station d'épuration de Price"
+                },
+                {
+                    "value": 49.0,
+                    "name": "Station d'épuration de Rivière-Bleue"
+                },
+                {
+                    "value": 291.0,
+                    "name": "Station d'épuration de Rouyn-Noranda (Noranda-Nord)"
+                },
+                {
+                    "value": 138331.0,
+                    "name": "Station d'épuration de Rouyn-Noranda (Évain)"
+                },
+                {
+                    "value": 52934.0,
+                    "name": "Station d'épuration de Roxton Falls"
+                },
+                {
+                    "value": 200.0,
+                    "name": "Station d'épuration de Saint-Bernard"
+                },
+                {
+                    "value": 803.0,
+                    "name": "Station d'épuration de Saint-Camille-de-Lellis"
+                },
+                {
+                    "value": 523.0,
+                    "name": "Station d'épuration de Saint-Clet"
+                },
+                {
+                    "value": 1550.0,
+                    "name": "Station d'épuration de Saint-Damien-de-Buckland"
+                },
+                {
+                    "value": 324858.0,
+                    "name": "Station d'épuration de Saint-Gabriel"
+                },
+                {
+                    "value": 2141.0,
+                    "name": "Station d'épuration de Saint-Gervais"
+                },
+                {
+                    "value": 7267.0,
+                    "name": "Station d'épuration de Saint-Gédéon-de-Beauce"
+                },
+                {
+                    "value": 27.0,
+                    "name": "Station d'épuration de Saint-Hubert-de-Rivière-du-Loup"
+                },
+                {
+                    "value": 891.0,
+                    "name": "Station d'épuration de Saint-Irénée"
+                },
+                {
+                    "value": 203.0,
+                    "name": "Station d'épuration de Saint-Isidore (Montérégie)"
+                },
+                {
+                    "value": 301584.0,
+                    "name": "Station d'épuration de Saint-Jacques"
+                },
+                {
+                    "value": 1.0,
+                    "name": "Station d'épuration de Saint-Jean-de-Matha"
+                },
+                {
+                    "value": 1875.0,
+                    "name": "Station d'épuration de Saint-Malachie"
+                },
+                {
+                    "value": 3405.0,
+                    "name": "Station d'épuration de Saint-Marc-des-Carrières"
+                },
+                {
+                    "value": 990.0,
+                    "name": "Station d'épuration de Saint-Mathias-sur-Richelieu"
+                },
+                {
+                    "value": 25.0,
+                    "name": "Station d'épuration de Saint-Mathieu-de-Beloeil (EA)"
+                },
+                {
+                    "value": 37.0,
+                    "name": "Station d'épuration de Saint-Maurice"
+                },
+                {
+                    "value": 50.0,
+                    "name": "Station d'épuration de Saint-Michel-des-Saints"
+                },
+                {
+                    "value": 1364.0,
+                    "name": "Station d'épuration de Saint-Nazaire"
+                },
+                {
+                    "value": 145.0,
+                    "name": "Station d'épuration de Saint-Paul-de-Montminy"
+                },
+                {
+                    "value": 60.0,
+                    "name": "Station d'épuration de Saint-Paulin"
+                },
+                {
+                    "value": 31465.0,
+                    "name": "Station d'épuration de Saint-Philippe"
+                },
+                {
+                    "value": 1184.0,
+                    "name": "Station d'épuration de Saint-Philippe-de-Néri"
+                },
+                {
+                    "value": 8906.0,
+                    "name": "Station d'épuration de Saint-Prosper"
+                },
+                {
+                    "value": 283.0,
+                    "name": "Station d'épuration de Saint-Siméon (Bonaventure)"
+                },
+                {
+                    "value": 4696.0,
+                    "name": "Station d'épuration de Saint-Siméon (Charlevoix)"
+                },
+                {
+                    "value": 500.0,
+                    "name": "Station d'épuration de Saint-Sulpice"
+                },
+                {
+                    "value": 2703.0,
+                    "name": "Station d'épuration de Sainte-Anne-de-la-Pérade"
+                },
+                {
+                    "value": 516.0,
+                    "name": "Station d'épuration de Sainte-Brigitte-de-Laval"
+                },
+                {
+                    "value": 1351.0,
+                    "name": "Station d'épuration de Sainte-Catherine-J-Cartier"
+                },
+                {
+                    "value": 75.0,
+                    "name": "Station d'épuration de Sainte-Croix"
+                },
+                {
+                    "value": 26.0,
+                    "name": "Station d'épuration de Sainte-Luce (Luceville)"
+                },
+                {
+                    "value": 2195.0,
+                    "name": "Station d'épuration de Sainte-Martine"
+                },
+                {
+                    "value": 51600.0,
+                    "name": "Station d'épuration de Schefferville"
+                },
+                {
+                    "value": 447.0,
+                    "name": "Station d'épuration de Scotstown"
+                },
+                {
+                    "value": 23700.0,
+                    "name": "Station d'épuration de Stanstead (Rock Island)"
+                },
+                {
+                    "value": 1214.0,
+                    "name": "Station d'épuration de Stoneham"
+                },
+                {
+                    "value": 1472.0,
+                    "name": "Station d'épuration de Sutton"
+                },
+                {
+                    "value": 126.0,
+                    "name": "Station d'épuration de Tadoussac"
+                },
+                {
+                    "value": 750.0,
+                    "name": "Station d'épuration de Tring-Jonction"
+                },
+                {
+                    "value": 1249.0,
+                    "name": "Station d'épuration de Ville-Marie (Duhamel)"
+                },
+                {
+                    "value": 50.0,
+                    "name": "Station d'épuration de Waterville"
+                },
+                {
+                    "value": 955.0,
+                    "name": "Station d'épuration de Yamachiche"
+                }
+            ]
+        },
+        {
+            "name": "Très grande",
+            "children": [
+                {
+                    "value": 1.0,
+                    "name": "Station d'épuration de Gatineau"
+                },
+                {
+                    "value": 1401.0,
+                    "name": "Station d'épuration de Granby"
+                },
+                {
+                    "value": 527154.0,
+                    "name": "Station d'épuration de Longueuil"
+                },
+                {
+                    "value": 9777038.0,
+                    "name": "Station d'épuration de Montréal (Station Jean-R.-Marcotte) "
+                },
+                {
+                    "value": 3231651.0,
+                    "name": "Station d'épuration de Québec (Est)"
+                },
+                {
+                    "value": 3655829.0,
+                    "name": "Station d'épuration de Québec (Ouest)"
+                },
+                {
+                    "value": 41003.0,
+                    "name": "Station d'épuration de Saint-Jean-sur-Richelieu"
+                },
+                {
+                    "value": 5697.0,
+                    "name": "Station d'épuration de Saint-Jérôme-Métropolitain"
+                },
+                {
+                    "value": 1030.0,
+                    "name": "Station d'épuration de Salaberry-de-Valleyfield"
+                },
+                {
+                    "value": 252711.0,
+                    "name": "Station d'épuration de Trois-Rivières Métropolitain"
+                }
+            ]
+        },
+        {
+            "name": "Très petite",
+            "children": [
+                {
+                    "value": 25.0,
+                    "name": "Station d'épuration Les Îles (Havre-Aubert)"
+                },
+                {
+                    "value": 6.0,
+                    "name": "Station d'épuration d'Ascot Corner (BD)"
+                },
+                {
+                    "value": 10.0,
+                    "name": "Station d'épuration d'Hudson"
+                },
+                {
+                    "value": 100.0,
+                    "name": "Station d'épuration d'Inverness"
+                },
+                {
+                    "value": 3604.0,
+                    "name": "Station d'épuration de Baie-James (Villebois)"
+                },
+                {
+                    "value": 18.0,
+                    "name": "Station d'épuration de Cantley (Lafortune)"
+                },
+                {
+                    "value": 2841.0,
+                    "name": "Station d'épuration de Deschambault"
+                },
+                {
+                    "value": 416.0,
+                    "name": "Station d'épuration de Dixville"
+                },
+                {
+                    "value": 1330.0,
+                    "name": "Station d'épuration de Hope"
+                },
+                {
+                    "value": 9042.0,
+                    "name": "Station d'épuration de L'Anse-Saint-Jean"
+                },
+                {
+                    "value": 8.0,
+                    "name": "Station d'épuration de L'Avenir"
+                },
+                {
+                    "value": 566.0,
+                    "name": "Station d'épuration de L'Isle-Verte"
+                },
+                {
+                    "value": 1470.0,
+                    "name": "Station d'épuration de L'Isle-aux-Coudres"
+                },
+                {
+                    "value": 192.0,
+                    "name": "Station d'épuration de La Patrie"
+                },
+                {
+                    "value": 52.0,
+                    "name": "Station d'épuration de Lac-des-Écorces"
+                },
+                {
+                    "value": 1187.0,
+                    "name": "Station d'épuration de Les Îles-de-la-Madeleine (Fatima)"
+                },
+                {
+                    "value": 3635.0,
+                    "name": "Station d'épuration de Lévis (Val-des-Bois)"
+                },
+                {
+                    "value": 100.0,
+                    "name": "Station d'épuration de Notre-Dame-de-la-Salette"
+                },
+                {
+                    "value": 1.0,
+                    "name": "Station d'épuration de Rivière-Ouelle"
+                },
+                {
+                    "value": 6442.0,
+                    "name": "Station d'épuration de Saint-Adelphe"
+                },
+                {
+                    "value": 14450.0,
+                    "name": "Station d'épuration de Saint-Albert"
+                },
+                {
+                    "value": 5291.0,
+                    "name": "Station d'épuration de Saint-Alphonse"
+                },
+                {
+                    "value": 408.0,
+                    "name": "Station d'épuration de Saint-Ambroise-de-Kildare"
+                },
+                {
+                    "value": 21.0,
+                    "name": "Station d'épuration de Saint-Benoît-Labre"
+                },
+                {
+                    "value": 30.0,
+                    "name": "Station d'épuration de Saint-Charles-Garnier"
+                },
+                {
+                    "value": 42.0,
+                    "name": "Station d'épuration de Saint-Cyrille-de-Lessard"
+                },
+                {
+                    "value": 5790.0,
+                    "name": "Station d'épuration de Saint-Célestin (Annaville)"
+                },
+                {
+                    "value": 90.0,
+                    "name": "Station d'épuration de Saint-Denis-de-Brompton (Village)"
+                },
+                {
+                    "value": 3103.0,
+                    "name": "Station d'épuration de Saint-François-de-Sales"
+                },
+                {
+                    "value": 176.0,
+                    "name": "Station d'épuration de Saint-Frédéric"
+                },
+                {
+                    "value": 3380.0,
+                    "name": "Station d'épuration de Saint-Georges (Saint-Jean-de-la-Lande"
+                },
+                {
+                    "value": 5645.0,
+                    "name": "Station d'épuration de Saint-Gilles"
+                },
+                {
+                    "value": 938.0,
+                    "name": "Station d'épuration de Saint-Hugues (2015)"
+                },
+                {
+                    "value": 1020.0,
+                    "name": "Station d'épuration de Saint-Isidore-de-Clifton"
+                },
+                {
+                    "value": 155.0,
+                    "name": "Station d'épuration de Saint-Jacque-de-Leeds"
+                },
+                {
+                    "value": 5.0,
+                    "name": "Station d'épuration de Saint-Janvier-de-Joly"
+                },
+                {
+                    "value": 16.0,
+                    "name": "Station d'épuration de Saint-Jean-de-l'Île-d'Orléans"
+                },
+                {
+                    "value": 126.0,
+                    "name": "Station d'épuration de Saint-Justin"
+                },
+                {
+                    "value": 100.0,
+                    "name": "Station d'épuration de Saint-Léon-de-Standon"
+                },
+                {
+                    "value": 25.0,
+                    "name": "Station d'épuration de Saint-Modeste"
+                },
+                {
+                    "value": 99.0,
+                    "name": "Station d'épuration de Saint-Narcisse-de-Rimouski"
+                },
+                {
+                    "value": 140.0,
+                    "name": "Station d'épuration de Saint-Noël"
+                },
+                {
+                    "value": 156.0,
+                    "name": "Station d'épuration de Saint-Patrice-de-Beaurivage"
+                },
+                {
+                    "value": 8.0,
+                    "name": "Station d'épuration de Saint-Paul-d'Abbotsford"
+                },
+                {
+                    "value": 1190.0,
+                    "name": "Station d'épuration de Saint-Placide"
+                },
+                {
+                    "value": 92.0,
+                    "name": "Station d'épuration de Saint-René-de-Matane"
+                },
+                {
+                    "value": 48.0,
+                    "name": "Station d'épuration de Saint-Urbain-Premier"
+                },
+                {
+                    "value": 12166.0,
+                    "name": "Station d'épuration de Saint-Vianney"
+                },
+                {
+                    "value": 875.0,
+                    "name": "Station d'épuration de Sainte-Angèle-de-Mérici"
+                },
+                {
+                    "value": 105.0,
+                    "name": "Station d'épuration de Sainte-Brigitte-des-Saults"
+                },
+                {
+                    "value": 1.0,
+                    "name": "Station d'épuration de Sainte-Christine-d'Auvergne"
+                },
+                {
+                    "value": 3095.0,
+                    "name": "Station d'épuration de Sainte-Clotilde"
+                },
+                {
+                    "value": 308.0,
+                    "name": "Station d'épuration de Sainte-Marguerite-Lac-Masson"
+                },
+                {
+                    "value": 1.0,
+                    "name": "Station d'épuration de Sainte-Ursule"
+                },
+                {
+                    "value": 311656.0,
+                    "name": "Station d'épuration de Shawinigan (Saint-Gérard)"
+                },
+                {
+                    "value": 150.0,
+                    "name": "Station d'épuration de Shawinigan (Saint-Jean-des-Piles)"
+                },
+                {
+                    "value": 3.0,
+                    "name": "Station d'épuration de Tourville"
+                },
+                {
+                    "value": 193.0,
+                    "name": "Station d'épuration de Wotton"
+                }
+            ]
+        }
+    ]
+}

@@ -107,11 +107,16 @@
        font-weight: 600;
    }
    
-   #metric-modal {
-       height: 500px;
+   #div-metric-modal {
+       height: 100%;
        width: 50%;
        background-color: white;
        margin: 5px;
+   }
+   
+   #metric-modal {
+       height: 100%;
+       width: 100%;
    }
    
    body {
@@ -153,4 +158,27 @@
    
    .section {
        display: flex !important;
+   }
+   
+   .panel {
+       margin-top: 80px;
+   }
+   
+   .legendSequential {
+       font-family: "Open Sans";
+       font-size: 13px;
+   }
+   
+   #canvasTreemap {
+       margin-top: 10px;
+       font-size: 5px;
+       height: 100%;
+       width: 100%;
+   }
+   
+   #canvasTreemap2 {
+       margin-top: 10px;
+       font-size: 10px;
+       height: 100%;
+       width: 100%;
    }

@@ -16,18 +16,25 @@
       <body>
        <div id="fullpage">
         <div class="section" id="section0">
-            <div class="intro">
+          <div class="intro">
             <header>
               <h1>
                 Les stations d'épurations et leurs débordements au Québec
               </h1>
               <h2>
-                From 2017 to 2020
+                From 2017 to 2019
               </h2>
             </header>
             <div style="display: flex; height:100%">
               <div id='map'></div>
+              <div id="div-metric-modal">
+                <input type="checkbox" name="myCheckBox" checked>
+                <label for="myCheckBox">Station d'épuration</label>
+                <input type="checkbox" name="myCheckBox2" checked>
+                <label for="myCheckBox2">Intensité des débordements sur les municipalités</label>
+
               <div id='metric-modal'></div>
+                            </div>
               </div>
             </div>
         </div>
@@ -37,19 +44,60 @@
                 Le top-50 des riviéres par rapport au débordements des eaux usées au Québec
               </h1>
               <h2>
-                From 2017 to 2020
+                From 2011 to 2019
               </h2>
           </header>
-        <div style="height:100%">
-          <div class='heatmap'style="height:100%"></div>
-        </div>
+          <div style="height:100%">
+            <div class='heatmap'style="height:100%"></div>
+          </div>
         </div>
         <div class="section" id="section2">
-        <div id ="barchart"></div>
+          <header>
+              <h1>
+                Les répartions des débordements
+              </h1>
+              <h2>
+                From 2017 to 2019
+              </h2>
+          </header>
+          <div style="
+                    display: flex;
+                    flex-wrap: wrap;
+                    flex-direction: row;
+                    height: 100%;
+                    /* justify-items: center; */
+                    align-content: stretch;
+                    justify-content: space-around;
+                    align-items: stretch;
+            ">
+          <div>
+          <h2 style="font-size:20px"> Le volume de débordements par technique de traitement:</h2>
+            <div id='canvasTreemap'></div>
+          </div>
+          <div>
+          
+          <h2 style="font-size:20px"> Le volume de débordements par STEP:</h2>
+            <div id='canvasTreemap2'></div>
+          </div>
+          </div>
         </div>
-        <!-- <div class="section" id="section4">
-          <h1>Section 5</h1>
-      </div> -->
+        <div class="section" id="section3">
+          <header>
+          <h1>
+            Les contextes des surverses au cours du temps
+          </h1>
+              <h2>
+                From 2017 to 2019
+              </h2>
+        </header>
+        <main>
+        <div class='panel'>
+          <div class="viz-container">
+            <div class="graph" id="bar-chart">
+            </div>
+          </div>
+        </main>
+        </div>
     </div>
         <script src="https://d3js.org/d3.v5.js"></script>
         <script type="text/javascript" src="https://alvarotrigo.com/fullPage/fullpage.extensions.min.js"></script>
@@ -57,7 +105,7 @@
         <script type="text/javascript">
           new fullpage('#fullpage', {
             sectionsColor: ['whitesmoke', 'whitesmoke', 'whitesmoke', 'whitesmoke', 'whitesmoke'],
-            anchors: ['firstPage', 'secondPage', '3rdPage'],
+            anchors: ['firstPage', 'secondPage', '3rdPage', '4thPage', '5thPage'],
               navigationTooltips: ['fullPage', 'Open', 'Easy', 'Touch'],
               css3: true,
               scrollingSpeed: 1000,

@@ -1,7 +1,7 @@
 import d3Legend from 'd3-svg-legend'
 
 export function CreateHeatmap() {
-    d3.csv("region_dt_intensite.csv").then(function(data) {
+    d3.csv("river_dt_intensite.csv").then(function(data) {
 
         var rivers = d3.nest()
             .key(function(d) { return d.river; })
@@ -58,11 +58,6 @@ export function CreateHeatmap() {
         svg.append('g')
             .attr('class', 'y axis')
 
-        svg.append("text") // text label for the x axis
-            .attr("x", 265)
-            .attr("y", 240)
-            .style("text-anchor", "middle")
-            .text("Date");
         // create a tooltip
         var Tooltip = svg.append("div")
             .attr("class", "heatmaptooltip")
@@ -77,7 +72,6 @@ export function CreateHeatmap() {
 
         // Three function that change the tooltip when user hover / move / leave a cell
         var mouseover = function(d) {
-            console.log(d)
             Tooltip
                 .style("opacity", 1)
             d3.select(this)
