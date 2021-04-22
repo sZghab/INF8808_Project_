@@ -1,0 +1,143 @@
+{
+    "name": "flare",
+    "children": [
+        {
+            "name": "Autres",
+            "children": [
+                {
+                    "value": 1.0,
+                    "name": "Filtre à tourbe Ecoflo"
+                },
+                {
+                    "value": 938.0,
+                    "name": "Réacteur biologique à garnissage en suspension"
+                },
+                {
+                    "value": 3887.0,
+                    "name": "Réacteur biologique à garnissage en suspension de type SMBR"
+                }
+            ]
+        },
+        {
+            "name": "Biofiltration",
+            "children": [
+                {
+                    "value": 7236370.0,
+                    "name": "Biofiltration"
+                }
+            ]
+        },
+        {
+            "name": "Boues activées",
+            "children": [
+                {
+                    "value": 48803474.0,
+                    "name": "Boues activées"
+                },
+                {
+                    "value": 257686.0,
+                    "name": "Boues activées à aération prolongée"
+                },
+                {
+                    "value": 6013804.0,
+                    "name": "Boues activées à fossé d'oxydation"
+                },
+                {
+                    "value": 198944.0,
+                    "name": "Boues activées à réacteur biologique séquentiel"
+                }
+            ]
+        },
+        {
+            "name": "Disques biologiques",
+            "children": [
+                {
+                    "value": 2840.0,
+                    "name": "Disques biologiques"
+                },
+                {
+                    "value": 1020.0,
+                    "name": "Disques biologiques à réacteur biologique rotatif"
+                }
+            ]
+        },
+        {
+            "name": "Dégrillage",
+            "children": [
+                {
+                    "value": 32525.0,
+                    "name": "Dégrilleur fin"
+                }
+            ]
+        },
+        {
+            "name": "Fosse septique",
+            "children": [
+                {
+                    "value": 3635.0,
+                    "name": "Fosse septique"
+                }
+            ]
+        },
+        {
+            "name": "Physico-chimique",
+            "children": [
+                {
+                    "value": 10445378.0,
+                    "name": "Physico-chimique"
+                }
+            ]
+        },
+        {
+            "name": "Étangs aérés",
+            "children": [
+                {
+                    "value": 23867063.0,
+                    "name": "Étangs aérés"
+                },
+                {
+                    "value": 3686.0,
+                    "name": "Étangs aérés avec bassin complètement mélangé"
+                },
+                {
+                    "value": 26719.0,
+                    "name": "Étangs aérés à parois verticales"
+                },
+                {
+                    "value": 46069.0,
+                    "name": "Étangs aérés à réacteur biologique avec lit en mouvement"
+                }
+            ]
+        },
+        {
+            "name": "Étangs aérés à rétention réduite",
+            "children": [
+                {
+                    "value": 830.0,
+                    "name": "Étangs aérés à rétention réduite"
+                },
+                {
+                    "value": 10048.0,
+                    "name": "Étangs aérés à rétention réduite à parois verticales"
+                }
+            ]
+        },
+        {
+            "name": "Étangs non aérés",
+            "children": [
+                {
+                    "value": 12166.0,
+                    "name": "Étangs non aérés et filtre"
+                },
+                {
+                    "value": 1802.0,
+                    "name": "Étangs non aérés à décharge en continu"
+                },
+                {
+                    "value": 7784.0,
+                    "name": "Étangs non aérés à vidange périodique"
+                }
+            ]
+        }
+    ]
+}

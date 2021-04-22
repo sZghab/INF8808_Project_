@@ -8,6 +8,7 @@ import * as hover from './scripts/hover.js'
 import * as util from './scripts/util.js'
 
 import * as quebec_map from './scripts/map'
+import * as first_treemap from './scripts/treemap-first'
 
 import * as d3Chromatic from 'd3-scale-chromatic'
 
@@ -19,7 +20,16 @@ import * as d3Chromatic from 'd3-scale-chromatic'
 
 (function(d3) {
     CreateMap()
+    CreateTreemap()
 })(d3)
+
+function CreateTreemap() {
+
+    d3.json("data_treemap1.json").then(function(data) {
+        // console.log(data);
+        first_treemap.firstTreemap(data);
+    })
+}
 
 
 function CreateMap() {
