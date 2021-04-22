@@ -100,23 +100,23 @@ export function firstTreemap(data){
             if(category === 'Autres'){
                 return 'orange'
             }else if(category === "Biofiltration"){
-                return 'lightgreen'
+                return '#b07aa1' //'lightgreen'
             }else if(category === 'Boues activées'){
-                return 'crimson'
+                return '#e15759' //'crimson'
             }else if(category === 'Disques biologiques'){
-                return 'steelblue'
+                return 'green'
             }else if(category === 'Dégrillage'){
                 return 'pink'
             }else if(category === 'Fosse septique'){
                 return 'khaki'
             }else if(category === 'Étangs aérés'){
-                return 'green'
+                return '#76b7b2' //'steelblue'
             }else if(category === 'Étangs aérés à rétention réduite'){
                 return 'yellow'
             }else if(category === 'Étangs non aérés'){
                 return 'grey'
             }else if(category === 'Physico-chimique'){
-                return 'purple'
+                return '#bab0ac' //'purple'
             }
         })
         .attr('child-name', (data) => {

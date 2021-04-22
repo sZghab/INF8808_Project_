@@ -35,7 +35,7 @@ export function secondTreemap(data){
         (hierarchy)
     
     let dataTiles = hierarchy.leaves()
-    console.log(hierarchy)
+    // console.log(hierarchy)
 
     let block = canvas.selectAll('g')
                 .data(dataTiles)
@@ -49,31 +49,35 @@ export function secondTreemap(data){
 
     block.append('rect')
         .attr('class', 'tile')
-        // .attr("fill",function(data) { var i=0; for(i=0;i<=4;i++) { return map.color(data.data.children[i].name) } })
-        // .attr('fill', (data) => {
-        //     let category = data['parent']['data']['name']
-        //     if(category === 'Autres'){
-        //         return 'orange'
-        //     }else if(category === "Biofiltration"){
-        //         return 'lightgreen'
-        //     }else if(category === 'Boues activées'){
-        //         return 'crimson'
-        //     }else if(category === 'Disques biologiques'){
-        //         return 'steelblue'
-        //     }else if(category === 'Dégrillage'){
-        //         return 'pink'
-        //     }else if(category === 'Fosse septique'){
-        //         return 'khaki'
-        //     }else if(category === 'Étangs aérés'){
-        //         return 'green'
-        //     }else if(category === 'Étangs aérés à rétention réduite'){
-        //         return 'yellow'
-        //     }else if(category === 'Étangs non aérés'){
-        //         return 'grey'
-        //     }else if(category === 'Physico-chimique'){
-        //         return 'purple'
-        //     }
-        // })
+        // .attr("fill",function(data) {
+        //     console.log(data);
+        //         console.log(data.parent.data.name);
+        //         // for(var color in data.parent.data.name){console.log(color);}
+        //         // console.log(data.parent.parent.children);
+        //         // data.parent.parent.children.forEach( (child, i) => {
+        //         //     console.log(i);
+        //         // })
+        //         // for(var child in data.parent.parent.children) {
+        //         //     // console.log(indexOf(child));
+        //         //     // console.log(child);
+        //         // }
+        //         // console.log(map.colorScale(data.parent.data.name));
+        //         // return map.colorScale(data.parent.data.name)
+        //     })
+        .attr('fill', (data) => {
+            let colorCategory = data.parent.data.name
+            if(colorCategory === 'Très grande'){
+                return '#bd0026'
+            }else if(colorCategory === "Grande"){
+                return '#f03b20'
+            }else if(colorCategory === 'Moyenne'){
+                return '#fd8d3c'
+            }else if(colorCategory === 'Petite'){
+                return '#fecc5c'
+            }else if(colorCategory === 'Très petite'){
+                return '#ffffb2'
+            }
+        })
 
         // .attr('child-name', (data) => {
         //     return data['data']['name']
@@ -96,8 +100,16 @@ export function secondTreemap(data){
             tooltip.transition()
                     .style('visibility', 'visible')
 
+            
+
             let revenue = data['data']['value'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
+            // d3.select('#tooltip2')
+            //     .html(revenue + ' m³ ' + '<hr />' + data['data']['name'])
+            //     .style('visibility', 'visible')
+            //     .style('opacity',0.85)
+            //     .style('left', (d3.event.pageX)+'px')
+            //     .style('top', (d3.event.pageY)+'px')
 
             tooltip.html(
                 revenue + ' m³ ' + '<hr />' + data['data']['name']
@@ -108,6 +120,8 @@ export function secondTreemap(data){
         .on('mouseout', (data) => {
             tooltip.transition()
                     .style('visibility', 'hidden')
+                    // .style('left','-1000px')
+                    // .style('opacity', 0)
         })
 
 
