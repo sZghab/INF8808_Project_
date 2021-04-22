@@ -91,8 +91,16 @@ export function secondTreemap(data) {
             tooltip2.transition()
                 .style('visibility', 'visible')
 
+
+
             let revenue = data['data']['value'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
+            // d3.select('#tooltip2')
+            //     .html(revenue + ' m³ ' + '<hr />' + data['data']['name'])
+            //     .style('visibility', 'visible')
+            //     .style('opacity',0.85)
+            //     .style('left', (d3.event.pageX)+'px')
+            //     .style('top', (d3.event.pageY)+'px')
 
             tooltip2.html(
                 revenue + ' m³ ' + '<hr />' + data['data']['name']
