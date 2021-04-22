@@ -77,11 +77,11 @@ export function firstTreemap(data){
     )
 
     d3.treemap()
-        .size([width*0.99,height*0.99]).padding(2).round(true)
+        .size([width,height]).padding(2).round(true)
         (hierarchy)
     
     let dataTiles = hierarchy.leaves()
-    console.log(dataTiles)
+    // console.log(dataTiles)
 
     let block = canvas.selectAll('g')
                 .data(dataTiles)

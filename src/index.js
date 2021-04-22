@@ -9,6 +9,7 @@ import * as util from './scripts/util.js'
 
 import * as quebec_map from './scripts/map'
 import * as first_treemap from './scripts/treemap-first'
+import * as second_treemap from './scripts/treemap-second'
 
 import * as d3Chromatic from 'd3-scale-chromatic'
 
@@ -29,7 +30,13 @@ function CreateTreemap() {
         // console.log(data);
         first_treemap.firstTreemap(data);
     })
+
+    d3.json("data_treemap2.json").then(function(data) {
+        // console.log(data);
+        second_treemap.secondTreemap(data);
+    })
 }
+
 
 
 function CreateMap() {
