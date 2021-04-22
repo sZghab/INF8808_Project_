@@ -77,7 +77,7 @@ export function firstTreemap(data){
     )
 
     d3.treemap()
-        .size([width,height]).padding(2).round(true)
+        .size([width*0.99,height*0.99]).padding(2).round(true)
         (hierarchy)
     
     let dataTiles = hierarchy.leaves()
@@ -116,7 +116,7 @@ export function firstTreemap(data){
             }else if(category === 'Étangs non aérés'){
                 return 'grey'
             }else if(category === 'Physico-chimique'){
-                return 'red'
+                return 'purple'
             }
         })
         .attr('child-name', (data) => {
