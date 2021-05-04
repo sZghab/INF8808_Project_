@@ -796,10 +796,10 @@ export function drawStackedBarChart(data, color) {
         .enter().append("g")
         .attr("fill", function(d) { return color(d.key); })
         .selectAll("rect")
-        // enter a second time = loop subgroup per subgroup to add all rectangles
         .data(function(d) { return d; })
-        .enter().append("rect")
-        .attr("x", function(d) { console.log(d.data); return x(d.data.Group); })
+        .enter()
+        .append("rect")
+        .attr("x", function(d) { return x(d.data.Group); })
         .attr("y", function(d) { return y(d[1]); })
         .attr("height", function(d) { return y(d[0]) - y(d[1]); })
         .attr("width", x.bandwidth())
@@ -905,18 +905,17 @@ export function drawBarChart(data) {
 }
 
 export function setTooltip(myicon_id, mypopup_id) {
-    var myicon = d3.select("#" + myicon_id);
-    var mypopup = d3.select("#" + mypopup_id);
-    mypopup.style("display", "none");
+    d3.select("#" + mypopup_id).style("display", "none");
 
-    myicon.on("mouseover", (evt) => {
-        mypopup.style("top", (d3.event.pageY - 50) + "px")
-            .style("left", (d3.event.pageX + 10) + "px")
-            .style("display", "block");
-    });
-    myicon.on("mouseout", (evt) => {
-        mypopup.style("display", "none");
-    });
+    d3.select("#" + myicon_id)
+        .on("mouseover", (evt) => {
+            d3.select("#" + mypopup_id).style("top", (d3.event.pageY - 50) + "px")
+                .style("left", (d3.event.pageX + 10) + "px")
+                .style("display", "block");
+        })
+        .on("mouseout", (evt) => {
+            d3.select("#" + mypopup_id).style("display", "none");
+        });
 
 
 }
