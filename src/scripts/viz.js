@@ -799,7 +799,7 @@ export function drawStackedBarChart(data, color) {
         // enter a second time = loop subgroup per subgroup to add all rectangles
         .data(function(d) { return d; })
         .enter().append("rect")
-        .attr("x", function(d) { return x(d.data.Group); })
+        .attr("x", function(d) { console.log(d.data); return x(d.data.Group); })
         .attr("y", function(d) { return y(d[1]); })
         .attr("height", function(d) { return y(d[0]) - y(d[1]); })
         .attr("width", x.bandwidth())
