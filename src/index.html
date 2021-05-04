@@ -20,18 +20,35 @@
         <div class="section" id="section0">
             <div class="intro">
                 <header>
-                    <h1>
-                        Les stations d'épurations et leurs débordements au Québec
-                    </h1>
-                    <h2>
-                        De 2017 à 2019
-                    </h2>
+                    <svg width="100" height="100">
+                        <g id="map_myicon" pointer-events="all">
+                            <circle cx="50" cy="50" r="14" fill="none" stroke="gold" stroke-width="2"/>
+                            <circle cx="50" cy="55" r="2" fill="gold"/>
+                            <rect x="48" y="40" width="3" height="10" fill="gold"/>
+                        </g>
+                    </svg>
+                    <div class="toolpopup" id="map_mypopup">
+                        <h3> Les stations d'épurations et leurs débordements au Québec
+                        </h3>
+                        <p>Sur cette partie on présente les volumes de débordements et les stations d'épuration du Québec.</p>
+                        <p>Sur la carte géographique on présente les stations d'épuration des municipalités du Québec. Veuillez cocher "station d'épuration" pour les visualiser. De plus, on présente les intensités des débordements par municipalité sur une
+                            carte choropléthe. Finalement, on illuste l'évolution des volumes de débordements au fil des années sur l'ensemble des régions.</p>
+                        <p>Survoler sur les barres pour plus de détails.</p>
+                    </div>
+                    <div>
+                        <h1>
+                            Les stations d'épurations et leurs débordements au Québec
+                        </h1>
+                        <h2>
+                            De 2017 à 2019
+                        </h2>
+                    </div>
                 </header>
                 <div style="display: flex; height:90%">
                     <div style="width: 70%">
                         <div style="margin-bottom:10px; display: flex; justify-content: space-evenly;">
                             <div>
-                                <input type="checkbox" id="cb_step" name="step" checked>
+                                <input type="checkbox" id="cb_step" name="step" unchecked>
                                 <label for="step">Station d'épuration</label>
                             </div>
                             <div>
@@ -62,12 +79,28 @@
 
         <div class="section" id="section1">
             <header>
-                <h1>
-                    Le top-50 des riviéres par rapport au débordements des eaux usées au Québec
-                </h1>
-                <h2>
-                    De 2011 à 2019
-                </h2>
+                <svg width="100" height="100">
+                    <g id="heat_myicon" pointer-events="all">
+                        <circle cx="50" cy="50" r="14" fill="none" stroke="gold" stroke-width="2"/>
+                        <circle cx="50" cy="55" r="2" fill="gold"/>
+                        <rect x="48" y="40" width="3" height="10" fill="gold"/>
+                    </g>
+                </svg>
+                <div class="toolpopup" id="heat_mypopup">
+                    <h3> Le top-50 des riviéres par rapport au débordements des eaux usées au Québec
+                    </h3>
+                    <p>Sur cette partie on présente les intensités de débordements par cours d'eau.</p>
+                    <p>Sur le fil des années on enregistre on estime les intensités des débordements par les ouvrages de survers dans les différents cours d'eau du Québec.</p>
+                    <p>Survoler sur les barres pour plus de détails.</p>
+                </div>
+                <div>
+                    <h1>
+                        Le top-50 des riviéres par rapport au débordements des eaux usées au Québec
+                    </h1>
+                    <h2>
+                        De 2011 à 2019
+                    </h2>
+                </div>
             </header>
             <div style="height:100%">
                 <div class="heatmap" style="height:100%"></div>
@@ -76,12 +109,27 @@
 
         <div class="section" id="section2">
             <header>
-                <h1>
-                    Les répartions des débordements
-                </h1>
-                <h2>
-                    De 2017 à 2019
-                </h2>
+                <svg width="100" height="100">
+                    <g id="tree_myicon" pointer-events="all">
+                        <circle cx="50" cy="50" r="14" fill="none" stroke="gold" stroke-width="2"/>
+                        <circle cx="50" cy="55" r="2" fill="gold"/>
+                        <rect x="48" y="40" width="3" height="10" fill="gold"/>
+                    </g>
+                </svg>
+                <div class="toolpopup" id="tree_mypopup">
+                    <h3>Les répartions des débordements</h3>
+                    <p>Sur cette partie on présente les facteurs impactants les débordements de surverses.</p>
+                    <p>Les types de traitement d'épuration impacte les taux de débordements. Parfois des stations de taille moyenne contribue à des volumes importants de débordements par rapport à des taille trés grande.</p>
+                    <p>Survoler sur les barres pour plus de détails.</p>
+                </div>
+                <div>
+                    <h1>
+                        Les répartions des débordements
+                    </h1>
+                    <h2>
+                        De 2017 à 2019
+                    </h2>
+                </div>
             </header>
             <div style="
                       display: flex;
@@ -107,12 +155,27 @@
 
         <div class="section" id="section3">
             <header>
-                <h1>
-                    Les contextes des surverses au cours du temps
-                </h1>
-                <h2>
-                    De 2017 à 2019
-                </h2>
+                <svg width="100" height="100">
+                    <g id="stacked_bar_myicon" pointer-events="all">
+                        <circle cx="50" cy="50" r="14" fill="none" stroke="gold" stroke-width="2"/>
+                        <circle cx="50" cy="55" r="2" fill="gold"/>
+                        <rect x="48" y="40" width="3" height="10" fill="gold"/>
+                    </g>
+                </svg>
+                <div class="toolpopup" id="stacked_bar_mypopup">
+                    <h3>Les contextes des surverses au cours du temps</h3>
+                    <p>Sur cette partie on présente les débordements par contexte de surverses.</p>
+                    <p>Contexte du débordement : Les valeurs de contexte de débordement sont : «Temps sec», «Urgence», «Pluie», «Fonte des neiges» ou «Réalisation de travaux planifiés».</p>
+                    <p>Survoler sur les barres pour plus de détails.</p>
+                </div>
+                <div>
+                    <h1>
+                        Les contextes des surverses au cours du temps
+                    </h1>
+                    <h2>
+                        De 2017 à 2019
+                    </h2>
+                </div>
             </header>
             <div class="panel">
                 <div class="viz-container" style="height: 100%;">
@@ -123,12 +186,28 @@
         </div>
         <div class="section" id="section4">
             <header>
-                <h1>
-                    Les débordements par catégorie de suivi
-                </h1>
-                <h2>
-                    De 2017 à 2019
-                </h2>
+                <svg width="100" height="100">
+                    <g id="bar_myicon" pointer-events="all">
+                        <circle cx="50" cy="50" r="14" fill="none" stroke="gold" stroke-width="2"/>
+                        <circle cx="50" cy="55" r="2" fill="gold"/>
+                        <rect x="48" y="40" width="3" height="10" fill="gold"/>
+                    </g>
+                </svg>
+                <div class="toolpopup" id="bar_mypopup">
+                    <h3>Les débordements par catégorie de suivi</h3>
+                    <p>Sur cette partie on présente les débordements par catégorie de suivi.</p>
+                    <p>Catégorie de suivi : Code de la catégorie de suivi. Les valeurs possibles sont: 01, 02, 03, 04, 05 et 06. Les fréquences de suivi des différents paramètres aux effluents et affluents des stations d’épuration dépendent de du type de
+                        traitement et de la catégorie de suivi.</p>
+                    <p>Survoler sur les barres pour plus de détails.</p>
+                </div>
+                <div>
+                    <h1>
+                        Les débordements par catégorie de suivi
+                    </h1>
+                    <h2>
+                        De 2017 à 2019
+                    </h2>
+                </div>
             </header>
             <div class="panel">
                 <div class="viz-container" style="height: 100%;">

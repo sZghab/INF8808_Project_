@@ -1,52 +1,48 @@
-/**
- * Gets the names of the neighborhoods.
- *
- * @param {object[]} data The data to analyze
- * @returns {string[]} The names of the neighorhoods in the data set
- */
-export function getNeighborhoodNames (data) {
-  // TODO: Return the neihborhood names
-  return []
+export function groupIntensiteByMunicipalite(data) {
+    var values = []
+    var groupByRegion = d3.nest()
+        .key(function(d) { return d["MUNICIPALITÉ"]; })
+        .rollup(function(v) { return d3.mean(v, function(d) { return d["intensité"]; }); })
+        .entries(data);
+
+    groupByRegion.forEach((d) => values.push(d.value))
+    return groupByRegion
 }
 
-/**
- * Filters the data by the given years.
- *
- * @param {object[]} data The data to filter
- * @param {number} start The start year (inclusive)
- * @param {number} end The end year (inclusive)
- * @returns {object[]} The filtered data
- */
-export function filterYears (data, start, end) {
-  // TODO : Filter the data by years
-  return []
+export function groupVolumeByYear(data) {
+    data.forEach(function(d) {
+        d.year_month = d["Date de début du débordement"].getFullYear() + "-" + d["Date de début du débordement"].getMonth().toString().padStart(2, "0");
+    })
+    var parseTime = d3.timeParse("%Y-%m");
+    var groupByYear = d3.nest()
+        .key(function(d) { return d.year_month; })
+        .rollup(function(v) { return d3.mean(v, function(d) { return d["Volume de débordement (m³)"]; }); })
+        .entries(data);
+
+    var tmp = []
+        // format month as a date
+    groupByYear.forEach(function(d) {
+        if (parseTime(d.key).getFullYear() > 2016) {
+            tmp.push({ "key": parseTime(d.key), "value": d.value })
+        }
+    });
+    return tmp
 }
 
-/**
- * Summarizes how any trees were planted each year in each neighborhood.
- *
- * @param {object[]} data The data set to use
- * @returns {object[]} A table of objects with keys 'Arrond_Nom', 'Plantation_Year' and 'Counts', containing
- * the name of the neighborhood, the year and the number of trees that were planted
- */
-export function summarizeYearlyCounts (data) {
-  // TODO : Construct the required data table
-  return []
-}
+export function getRiverAndYears(data) {
+    var rivers = d3.nest()
+        .key(function(d) { return d.river; })
+        .rollup(function(v) { return d3.mean(v, function(d) { return d["intensité"]; }); })
+        .entries(data);
 
-/**
- * For the heat map, fills empty values with zeros where a year is missing for a neighborhood because
- * no trees were planted or the data was not entered that year.
- *
- * @param {object[]} data The datas set to process
- * @param {string[]} neighborhoods The names of the neighborhoods
- * @param {number} start The start year (inclusive)
- * @param {number} end The end year (inclusive)
- * @param {Function} range A utilitary function that could be useful to get the range of years
- * @returns {object[]} The data set with a new object for missing year and neighborhood combinations,
- * where the values for 'Counts' is 0
- */
-export function fillMissingData (data, neighborhoods, start, end, range) {
-  // TODO : Find missing data and fill with 0
-  return []
+    rivers.sort(function(a, b) {
+        return parseFloat(a.value) - parseFloat(b.value);
+    });
+    var river_names = []
+
+    rivers.forEach(element => {
+        river_names.push(element.key)
+    });
+    return river_names;
+
 }

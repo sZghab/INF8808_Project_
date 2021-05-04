@@ -1,6 +1,6 @@
 import * as L from 'leaflet'
-
 import * as viz from './viz.js'
+import d3Legend from 'd3-svg-legend'
 
 export function addStationMapLegend(map, color) {
     var legend = L.control({ position: 'bottomleft' });
@@ -16,6 +16,7 @@ export function addStationMapLegend(map, color) {
         };
         return div;
     };
+
     return legend
 }
 
@@ -42,4 +43,40 @@ export function addChoroplethMapLegend(map) {
     };
 
     return legend
+}
+
+export function addHeatmapLegend(svg, color) {
+
+    svg.append("g")
+        .attr("class", "legendSequential")
+        .attr("transform", "translate(1250,100)");
+
+    var legendSequential = d3Legend.legendColor()
+        .shapeWidth(30)
+        .cells(10)
+        .orient("vertical")
+        .scale(color)
+        .labelAlign('start')
+        .title('Les intensités des débordements:')
+
+    svg.select(".legendSequential")
+        .call(legendSequential);
+}
+
+export function addTreemapLegend(canvas, color) {
+    canvas.append("g")
+        .attr("class", "legendSequential")
+        .attr("transform", "translate(0,0)");
+
+    var legendSequential = d3Legend.legendColor()
+        .shapeWidth(30)
+        .cells(10)
+        .orient("vertical")
+        .scale(color)
+        .labelAlign('start')
+        .title("Classe de traitement:")
+
+    canvas.select(".legendSequential")
+        .call(legendSequential);
+
 }

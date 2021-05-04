@@ -1,20 +1,19 @@
 import * as L from 'leaflet'
-import * as hover from './hover.js'
-import * as legend from './legend.js'
 import d3Legend from 'd3-svg-legend'
 
 var geojson;
-
-// Adding filters
 
 export function initFilters(data) {
     var tmp = [...new Map(data.map((x) => [x.properties["municipalite"], { "mrc": x.properties["municipalite"], "region": x.properties["region"] }])).values()];
     var region = [...new Map(tmp.map((x) => [x.region, x.region])).values()].sort();
     var mrc = [...new Map(tmp.map((x) => [x.mrc, x.mrc])).values()].sort();
+
+    d3.selectAll(".allOption").remove()
     d3.select("#region")
         .append("option")
         .attr("value", "all")
         .text("--all--")
+        .attr("class", "allOption")
 
     d3.select("#region")
         .selectAll("option")
@@ -28,6 +27,7 @@ export function initFilters(data) {
         .append("option")
         .attr("value", "all")
         .text("--all--")
+        .attr("class", "allOption")
 
     d3.select("#mrc")
         .selectAll("option")
@@ -37,85 +37,6 @@ export function initFilters(data) {
         .attr("value", function(d) { return d; })
         .text(function(d) { return d; });
 
-}
-
-export function initCheckboxStep(legendStep, map, colorStep, data) {
-    d3.select("#cb_step").on("change",
-        function(d) {
-            if (d3.select("#cb_step").property("checked")) {
-
-                drawCircles(map, colorStep, data)
-                hover.setStationPopupHandler(map)
-                var tmp = legend.addStationMapLegend(map, colorStep)
-                tmp.addTo(map);
-
-            } else {
-                d3.selectAll("circle").remove();
-                legendStep.remove();
-            }
-        });
-}
-
-export function initCheckboxChoropleth(map, geojson, legendmap) {
-    d3.select("#cb_choropleth").on("change",
-        function(d) {
-            if (d3.select("#cb_choropleth").property("checked")) {
-                geojson.addTo(map);
-                legendmap.addTo(map);
-            } else {
-                geojson.remove();
-                legendmap.remove();
-            }
-        });
-
-}
-
-export function initSelectRegion(rawData, data, map, colorStep) {
-    return d3.select("#region").on("change",
-        function() {
-            if (d3.select("#region").property("value") == "all") {
-                data = rawData
-            } else {
-                data = rawData.filter(function(el) {
-                    return el.properties.region == d3.select("#region").property("value")
-                });
-
-            }
-            viz.drawCircles(map, colorStep, data)
-            hover.setStationPopupHandler(map)
-            return data
-        })
-}
-
-export function initSelectMrc(rawData, rawGroupByRegion, mrcs, map, colorStep, geojson, legendmap, info) {
-    d3.select("#mrc").on("change",
-        function() {
-
-            var data, collection;
-
-            if (d3.select("#mrc").property("value") == "all") {
-                data = rawData
-                collection = mrcs
-            } else {
-                data = rawData.filter(function(el) {
-                    return el.properties.municipalite == d3.select("#mrc").property("value")
-                });
-
-                collection = mrcs.features.filter(function(el) {
-                    return el.properties.Municipalite == d3.select("#mrc").property("value")
-                });
-            }
-
-            drawCircles(map, colorStep, data)
-            hover.setStationPopupHandler(map)
-
-            geojson = drawChoropleth(map, info, collection, rawGroupByRegion)
-            legendmap = legend.addChoroplethMapLegend(map)
-
-            geojson.addTo(map);
-            legendmap.addTo(map);
-
-        })
 }
 
 function getIntensite(region, groupByRegion) {
@@ -129,7 +50,6 @@ function getIntensite(region, groupByRegion) {
     return result[0]
 }
 
-//              STEP MAP
 export function initMap() {
     /* Add leaflet map */
     var map = new L.Map("map", { center: [53.0, -70.0], zoom: 5, minZoom: 4 });
@@ -196,24 +116,20 @@ export function drawCircles(map, color, data) {
     update(map);
 }
 
-/* Fonction qui met à jour la position du cercle si quelque chose change */
 function update(map) {
     d3.selectAll("circle")
         .attr("cx", function(d) { return map.latLngToLayerPoint([d.geometry.coordinates[1], d.geometry.coordinates[0]]).x })
         .attr("cy", function(d) { return map.latLngToLayerPoint([d.geometry.coordinates[1], d.geometry.coordinates[0]]).y })
 }
 
-//              CHOROPLETH
 export function drawChoropleth(map, info, collection, groupByRegion) {
     geojson = L.geoJson(collection, {
         style: (feature) => { return style(feature, groupByRegion) },
         onEachFeature: (feature, layer) => { onEachFeature(layer, info, map) }
     })
-
     return geojson
 
 }
-
 
 export function getColor(d) {
     var color = d3.scaleSequential(d3.interpolateReds)
@@ -221,7 +137,6 @@ export function getColor(d) {
         .unknown("#ccc");
     return color(d)
 }
-
 
 function highlightFeature(e, info) {
     var layer = e.target;
@@ -268,11 +183,7 @@ function onEachFeature(layer, info, map) {
     });
 }
 
-
-/**
- * Volume Line Chart
- */
-
+/* Volume Line Chart */
 export function drawVolumeLineChart(tmp) {
 
     var svg = d3.select("#metric-modal").append("svg")
@@ -598,27 +509,11 @@ export function drawVolumeLineChart(tmp) {
 
 }
 
-/**
- * River Heatmap
- */
-export function drawRiversHeatmap(data) {
-    var rivers = d3.nest()
-        .key(function(d) { return d.river; })
-        .rollup(function(v) { return d3.mean(v, function(d) { return d["intensité"]; }); })
-        .entries(data);
-    rivers.sort(function(a, b) {
-        return parseFloat(a.value) - parseFloat(b.value);
-    });
-    var river_names = []
-    var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019]
-
-    rivers.forEach(element => {
-        river_names.push(element.key)
-    });
-
+/* Heatmap */
+export function drawRiversHeatmap(svg, color, river_names, years, data) {
     var margin = ({ top: 30, right: 1, bottom: 100, left: 300 })
     var height = 11
-    var innerHeight = height * rivers.length
+    var innerHeight = height * river_names.length
     var width = 100 * years.length + margin.left + margin.right
 
     var yAxis = g => g
@@ -632,11 +527,6 @@ export function drawRiversHeatmap(data) {
             .call(d3.axisBottom(x).ticks(null, "d"))
             .call(g => g.select(".domain").remove()))
 
-    var color = d3.scaleSequential(d3.interpolateReds)
-        .domain([0, 600000])
-        .unknown("#ccc");
-
-
     var y = d3.scaleBand()
         .domain(river_names)
         .range([margin.top, margin.top + innerHeight])
@@ -646,67 +536,16 @@ export function drawRiversHeatmap(data) {
         .domain(years)
         .padding(0.05);
 
-    const svg = d3.select(".heatmap")
-        .append("svg")
-        .attr("height", "100%")
-        .attr("width", "100%")
-
     svg.append("g")
         .call(yAxis);
     svg.append('g')
         .attr('class', 'x axis')
-
     d3.select('.x')
         .append("g")
         .call(xAxis)
 
     svg.append('g')
         .attr('class', 'y axis')
-
-    // create a tooltip
-    var Tooltip = d3.select(".heatmap")
-        .append("div")
-        .attr("class", "heatmaptooltip")
-        .style("background-color", "white")
-        .style("border", "solid")
-        .style("border-width", "2px")
-        .style("border-radius", "5px")
-        .style("padding", "5px")
-        .style("position", "absolute")
-        .style("visibility", "visible")
-
-    // Three function that change the tooltip when user hover / move / leave a cell
-    var mouseover = function(d) {
-        Tooltip
-            .style("opacity", 1)
-
-        d3.select(this)
-            .style("stroke", "black")
-            .style("opacity", 1)
-
-        d3.selectAll(".tick")
-            .filter(function(datum) {
-                return datum == d.year || datum == d.river
-            })
-            .style("font-weight", "bolder")
-            .style("color", "red")
-    }
-    var mousemove = function(d) {
-        Tooltip
-            .html("<b> Lac d'eau: </b> " + d["river"] + " <br/><b>Année: </b>" + d["year"] + " <br/><b>Intensité: </b>" + d["intensité"])
-            .style("top", (d3.event.pageY - 10) + "px")
-            .style("left", (d3.event.pageX + 10) + "px");
-    }
-    var mouseleave = function(d) {
-        Tooltip
-            .style("opacity", 0)
-        d3.select(this)
-            .style("stroke", "none")
-            .style("opacity", 0.8)
-        d3.selectAll(".tick")
-            .style("font-weight", "normal")
-            .style("color", "black")
-    }
 
     svg.append("g")
         .selectAll("g")
@@ -721,9 +560,6 @@ export function drawRiversHeatmap(data) {
         .style("stroke-width", 4)
         .style("stroke", "none")
         .style("opacity", 0.8)
-        .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseleave", mouseleave)
 
     d3.selectAll("g >rect")
         .select(function() { return this.parentNode; })
@@ -743,9 +579,242 @@ export function drawRiversHeatmap(data) {
         .attr("text-anchor", "middle")
         .attr("fill", function(d) { if (d["intensité"] >= 300000) return "white" })
 
-    svg.append("g")
+}
+/* Treemap volume par technique d'épuration*/
+export function drawVolPerTechTreemap(data, color, canvas) {
+    var width = parseInt(canvas.style("width"));
+    var height = parseInt(canvas.style("height"));
+
+    let hierarchy = d3.hierarchy(data,
+        (node) => {
+            return node['children']
+        }
+    ).sum(
+        (node) => {
+            return node['value']
+        }
+    ).sort(
+        (node1, node2) => {
+            return node2['value'] - node1['value']
+        }
+    )
+
+    d3.treemap()
+        .size([width - 200, height]).padding(2).round(true)
+        (hierarchy)
+    let dataTiles = hierarchy.leaves()
+
+    let block = canvas.selectAll('g')
+        .data(dataTiles)
+        .enter()
+        .append('g')
+        .attr('transform', (data) => {
+            return 'translate (' + data['x0'] + ', ' + data['y0'] + ')'
+        })
+
+    canvas.append("g")
         .attr("class", "legendSequential")
-        .attr("transform", "translate(1250,100)");
+        .attr("transform", "translate(" + (width - 200) + ", 20 )");
+
+    block.append('rect')
+        .attr('class', 'tile')
+        .attr('fill', (d) => { return color(d.parent.data.name) })
+        .attr('child-name', (data) => {
+            return data['data']['name']
+        })
+        .attr('parent-name', (data) => {
+            return data['parent']['data']['name']
+        })
+        .attr('child-value', (data) => {
+            return data['data']['value']
+        })
+        .attr('width', (data) => {
+            return data['x1'] - data['x0']
+        })
+        .attr('height', (data) => {
+            return data['y1'] - data['y0']
+        })
+
+    var format = d3.format(",d")
+    block.append("text")
+        .selectAll("tspan")
+        .data(d => {
+            if (d.data.value > 300) {
+                return d.data.name.split(/(?=[A-Z][a-z])|\s+/g).concat(format(d.value))
+            } else {
+                return "."
+            }
+        })
+        .join("tspan")
+        .attr("x", 3)
+        .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
+        .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
+        .text(d => d);
+
+}
+/* Treemap volume par station d'épuration*/
+export function drawVolPerStepTreemap(data, color, canvas) {
+
+    var width = parseInt(canvas.style("width"));
+    var height = parseInt(canvas.style("height"));
+
+    let hierarchy = d3.hierarchy(data,
+        (node) => {
+            return node['children']
+        }
+    ).sum(
+        (node) => {
+            return node['value']
+        }
+    ).sort(
+        (node1, node2) => {
+            return node2['value'] - node1['value']
+        }
+    )
+
+    d3.treemap()
+        .size([width - 150, height]).padding(2).round(true)
+        (hierarchy)
+
+    let dataTiles = hierarchy.leaves()
+
+    let block = canvas.selectAll('g')
+        .data(dataTiles)
+        .enter()
+        .append('g')
+        .attr('transform', (data) => {
+            return 'translate (' + data['x0'] + ', ' + data['y0'] + ')'
+        })
+
+    canvas.append("g")
+        .attr("class", "legendSequential")
+        .attr("transform", "translate(" + (width - 150) + ", 20 )");
+
+
+
+    block.append('rect')
+        .attr('class', 'tile')
+        .attr("fill", d => color(d.parent.data.name))
+        .attr("fill-opacity", 0.8)
+        .attr('width', (data) => {
+            return data['x1'] - data['x0']
+        })
+        .attr('height', (data) => {
+            return data['y1'] - data['y0']
+        })
+        .attr('stroke', 'white')
+
+
+    var format = d3.format(",d")
+    var ky = height / 1;
+
+    block.append("text")
+        .selectAll("tspan")
+        .data(d => [d.data.name.replace("Station d'épuration de", "").split('(')[0]].concat(format(d.value)))
+        .join("tspan")
+        .attr("x", 5)
+        .attr("y", (d, i, nodes) => {
+            return `${(i === nodes.length - 1) * 0.5 + 1.1 + i * 0.5}em`
+        })
+        .attr("opacity", function(d) { return d.dx * ky > 10 ? 1 : 0; })
+        .text((d, i, nodes) => d);
+
+    block.append("text")
+        .selectAll("tspan")
+        .data(d => {
+            if (d.data.value > 600000) {
+                return d.data.name.split("(")[0].split(/(?=[A-Z][a-z])/g).concat(format(d.value))
+            } else {
+                return "."
+            }
+        })
+        .join("tspan")
+        .attr("font-size", "5px")
+        .attr("x", 2)
+        .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.5 + 1.1 + i * 0.8}em`)
+        .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
+        .text(d => d);
+
+}
+
+export function drawStackedBarChart(data, color) {
+    // set the dimensions and margins of the graph
+    var svg = d3.select("#stacked-bar-chart")
+        .append("svg")
+        .attr("width", "80%")
+        .attr("height", "100%")
+
+    var width = parseInt(svg.style("width"));
+    var height = parseInt(svg.style("height"));
+
+    var margin = { top: 10, right: 30, bottom: 60, left: 50 },
+        width = width - margin.left - margin.right,
+        height = height - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    svg.append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+    // List of subgroups = header of the csv files = soil condition here
+    var subgroups = data.columns.slice(1)
+
+    // List of groups = species here = value of the first column called group -> I show them on the X axis
+    var groups = d3.map(data, function(d) { return (d.Group) }).keys()
+
+    // Add X axis
+    var x = d3.scaleBand()
+        .domain(groups)
+        .range([0, width - margin.left - margin.right])
+        .padding([0.2])
+
+    svg.append("g")
+        .attr("transform", "translate(150," + (height - 20) + ")")
+        .call(d3.axisBottom(x).tickSizeOuter(0))
+        .attr("class", "x")
+
+    svg.selectAll(".tick text").attr("transform", "rotate(-45) translate(-20,0)")
+        // Add Y axis
+    var y = d3.scaleLinear()
+        .domain([0, 10000000])
+        .range([height, 0]);
+
+    svg.append("g")
+        .call(d3.axisLeft(y))
+        .attr("transform", "translate(150,-20)")
+        .attr("width", 100);
+
+    //stack the data? --> stack per subgroup
+    var stackedData = d3.stack()
+        .keys(subgroups)
+        (data)
+
+    // Show the bars
+    svg.append("g")
+        .selectAll("g")
+        // Enter in the stack data = loop key per key = group per group
+        .data(stackedData)
+        .enter().append("g")
+        .attr("fill", function(d) { return color(d.key); })
+        .selectAll("rect")
+        // enter a second time = loop subgroup per subgroup to add all rectangles
+        .data(function(d) { return d; })
+        .enter().append("rect")
+        .attr("x", function(d) { return x(d.data.Group); })
+        .attr("y", function(d) { return y(d[1]); })
+        .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+        .attr("width", x.bandwidth())
+        .attr("transform", "translate(150,-20)")
+
+    var legendsvg = d3.select("#stacked-bar-chart")
+        .append("svg")
+        .attr("width", "15%")
+        .attr("height", "100%")
+
+
+    legendsvg.append("g")
+        .attr("class", "legendSequential")
+        .attr("transform", "translate(10,30)")
 
     var legendSequential = d3Legend.legendColor()
         .shapeWidth(30)
@@ -753,8 +822,102 @@ export function drawRiversHeatmap(data) {
         .orient("vertical")
         .scale(color)
         .labelAlign('start')
-        .title('Les intensités des débordements:')
+        .title('Les contextes des surverses:')
 
-    svg.select(".legendSequential")
+    legendsvg.select(".legendSequential")
         .call(legendSequential);
+
+
+    // focus chart x label
+    svg
+        .append("text")
+        .attr("transform", "translate(" + ((width / 2) + 50) + " ," + (height + margin.top + 60) + ")")
+        .style("text-anchor", "middle")
+        .style("font-size", "18px")
+        .text("Date de débordement");
+
+    // focus chart y label
+    svg
+        .append("text")
+        .attr("text-anchor", "middle")
+        .attr("transform", "translate(" + (-margin.left + 100) + "," + height / 2 + ")rotate(-90)")
+        .style("font-size", "18px")
+        .text("Volume de débordement en m3");
+
+
+}
+export function drawBarChart(data) {
+    var svg = d3.select("#bar-chart")
+        .append("svg")
+        .attr("width", "80%")
+        .attr("height", "100%");
+
+    var width = parseInt(svg.style("width"));
+    var height = parseInt(svg.style("height"));
+
+    var margin = { top: 10, right: 30, bottom: 60, left: 50 },
+        width = width - margin.left - margin.right,
+        height = height - margin.top - margin.bottom;
+
+    var xScale = d3.scaleBand().range([0, width - margin.left - margin.right]).padding(0.4),
+        yScale = d3.scaleLinear().range([height, 0]);
+
+    var g = svg.append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+    xScale.domain(data.map(function(d) { return d["code suivi"]; }));
+    yScale.domain([0, d3.max(data, function(d) { return d.value; })]);
+
+    g.append("g")
+        .call(d3.axisBottom(xScale))
+        .attr("transform", "translate(150," + (height - 20) + ")")
+
+    g.append("g")
+        .append("text")
+        .attr("transform", "translate(" + ((width / 2) + 50) + " ," + (height + margin.top + 40) + ")")
+        .style("text-anchor", "middle")
+        .style("font-size", "18px")
+        .text("Code de catégorie de suivi");
+
+    g.append("g")
+        .call(d3.axisLeft(yScale).tickFormat(function(d) { return d; })
+            .ticks(10))
+        .attr("transform", "translate(150,-20)")
+        .attr("width", 100)
+
+    g.append("g")
+        .append("text")
+        .style("font-size", "18px")
+        .attr("text-anchor", "end")
+        .text("Volume (m3)")
+        .attr("transform", "translate(" + (-margin.left + 80) + "," + ((height / 2) - 80) + ")rotate(-90)");
+
+    g.selectAll(".bar")
+        .data(data)
+        .enter().append("rect")
+        .attr("x", function(d) { return xScale(d["code suivi"]); })
+        .attr("y", function(d) { return yScale(d.value); })
+        .attr("width", xScale.bandwidth())
+        .attr("height", function(d) { return height - yScale(d.value); })
+        .attr("transform", "translate(150,-20)")
+        .attr("fill", "#2a9df4")
+
+}
+
+export function setTooltip(myicon_id, mypopup_id) {
+    var myicon = document.getElementById(myicon_id);
+    var mypopup = document.getElementById(mypopup_id);
+    mypopup.style.display = "none";
+    myicon.addEventListener("mouseover", (evt) => {
+        var iconPos = myicon.getBoundingClientRect();
+        mypopup.style.left = (iconPos.right + 20) + "px";
+        mypopup.style.top = (window.scrollY + iconPos.top - 60) + "px";
+        mypopup.style.display = "block";
+    });
+    myicon.addEventListener("mouseout", (evt) => {
+        mypopup.style.display = "none";
+    });
+
+
 }
