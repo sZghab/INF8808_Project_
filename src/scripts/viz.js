@@ -561,8 +561,6 @@ export function drawRiversHeatmap(svg, color, river_names, years, data) {
         .style("stroke-width", 4)
         .style("stroke", "none")
         .style("opacity", 0.8)
-
-    d3.selectAll("g >rect")
         .select(function() { return this.parentNode; })
         .append("text").text(function(d) { return d["intensité"] })
         .attr("x", (d, i) => { return x(d.year) + 1 })
