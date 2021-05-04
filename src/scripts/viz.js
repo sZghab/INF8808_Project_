@@ -95,13 +95,14 @@ export function drawCircles(map, color, data) {
         g = svg.append("g");
 
     /* Remove old circles */
-    d3.selectAll("circle").remove();
+    d3.selectAll(".mycircle").remove();
 
     /* Adding the circles with data */
     g.selectAll("circle")
         .data(data)
         .enter()
         .append("circle")
+        .attr("class", "mycircle")
         .style("stroke", "black")
         .attr("stroke-width", 1)
         .style("opacity", 1)
@@ -117,7 +118,7 @@ export function drawCircles(map, color, data) {
 }
 
 function update(map) {
-    d3.selectAll("circle")
+    d3.selectAll(".mycircle")
         .attr("cx", function(d) { return map.latLngToLayerPoint([d.geometry.coordinates[1], d.geometry.coordinates[0]]).x })
         .attr("cy", function(d) { return map.latLngToLayerPoint([d.geometry.coordinates[1], d.geometry.coordinates[0]]).y })
 }

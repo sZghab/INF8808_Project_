@@ -1,7 +1,7 @@
 export function setStationPopupHandler(map) {
 
     var popup = L.popup();
-    d3.selectAll("circle")
+    d3.selectAll(".mycircle")
         .on('mouseover', function(d) { //function to add mouseover event
             // Change the cursor style as a UI indicator.
             d3.select(this).style("cursor", "pointer");

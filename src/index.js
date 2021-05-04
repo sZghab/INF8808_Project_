@@ -48,7 +48,7 @@ import * as hover from './scripts/hover.js'
                     legendStep.addTo(map);
 
                 } else {
-                    d3.selectAll("circle").remove();
+                    d3.selectAll(".mycircle").remove();
                     legendStep.remove();
                 }
             });
