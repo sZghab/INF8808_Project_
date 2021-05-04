@@ -905,17 +905,17 @@ export function drawBarChart(data) {
 }
 
 export function setTooltip(myicon_id, mypopup_id) {
-    var myicon = document.getElementById(myicon_id);
-    var mypopup = document.getElementById(mypopup_id);
-    mypopup.style.display = "none";
-    myicon.addEventListener("mouseover", (evt) => {
-        var iconPos = myicon.getBoundingClientRect();
-        mypopup.style.left = (iconPos.right + 20) + "px";
-        mypopup.style.top = (window.scrollY + iconPos.top - 60) + "px";
-        mypopup.style.display = "block";
+    var myicon = d3.select("#" + myicon_id);
+    var mypopup = d3.select("#" + mypopup_id);
+    mypopup.style("display", "none");
+
+    myicon.on("mouseover", (evt) => {
+        mypopup.style("top", (d3.event.pageY - 50) + "px")
+            .style("left", (d3.event.pageX + 10) + "px")
+            .style("display", "block");
     });
-    myicon.addEventListener("mouseout", (evt) => {
-        mypopup.style.display = "none";
+    myicon.on("mouseout", (evt) => {
+        mypopup.style("display", "none");
     });
 
 
