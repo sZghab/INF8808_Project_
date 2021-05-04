@@ -1,143 +1,188 @@
 {
     "name": "flare",
-    "children": [
-        {
+    "children": [{
             "name": "Autres",
-            "children": [
-                {
-                    "value": 1.0,
-                    "name": "Filtre à tourbe Ecoflo"
+            "children": [{
+                    "name": "Bionest",
+                    "value": null
                 },
                 {
-                    "value": 938.0,
-                    "name": "Réacteur biologique à garnissage en suspension"
+                    "name": "Biotour",
+                    "value": null
                 },
                 {
-                    "value": 3887.0,
-                    "name": "Réacteur biologique à garnissage en suspension de type SMBR"
+                    "name": "Filtre à  tourbe",
+                    "value": null
+                },
+                {
+                    "name": "Filtre à  tourbe Ecoflo",
+                    "value": 1
+                },
+                {
+                    "name": "Filtres à  sable intermittents enfouis",
+                    "value": 0
+                },
+                {
+                    "name": "Filtres intermittents à  recirculation",
+                    "value": null
+                },
+                {
+                    "name": "Filtres intermittents à  recirculation avec infiltration",
+                    "value": null
+                },
+                {
+                    "name": "Fossés à  infiltration rapide",
+                    "value": null
+                },
+                {
+                    "name": "Marais artificiel (roseaux)",
+                    "value": null
+                },
+                {
+                    "name": "Réacteur biologique à  garnissage en suspension",
+                    "value": 187.6
+                },
+                {
+                    "name": "Réacteur biologique à  garnissage en suspension de type SMBR",
+                    "value": 155.48
+                },
+                {
+                    "name": "Réacteur biologique membranaire",
+                    "value": null
+                },
+                {
+                    "name": "Segflo et filtre Ecoflex",
+                    "value": null
                 }
             ]
         },
         {
             "name": "Biofiltration",
-            "children": [
-                {
-                    "value": 7236370.0,
-                    "name": "Biofiltration"
-                }
-            ]
+            "children": [{
+                "name": "Biofiltration",
+                "value": 9206.577608
+            }]
         },
         {
             "name": "Boues activées",
-            "children": [
-                {
-                    "value": 48803474.0,
-                    "name": "Boues activées"
+            "children": [{
+                    "name": "Boues activées",
+                    "value": 13115.68772
                 },
                 {
-                    "value": 257686.0,
-                    "name": "Boues activées à aération prolongée"
+                    "name": "Boues activées à  aération prolongée",
+                    "value": 2045.126984
                 },
                 {
-                    "value": 6013804.0,
-                    "name": "Boues activées à fossé d'oxydation"
+                    "name": "Boues activées à  fossé d'oxydation",
+                    "value": 5716.543726
                 },
                 {
-                    "value": 198944.0,
-                    "name": "Boues activées à réacteur biologique séquentiel"
-                }
-            ]
-        },
-        {
-            "name": "Disques biologiques",
-            "children": [
-                {
-                    "value": 2840.0,
-                    "name": "Disques biologiques"
+                    "name": "Boues activées à  réacteur biologique séquentiel",
+                    "value": 520.7958115
                 },
                 {
-                    "value": 1020.0,
-                    "name": "Disques biologiques à réacteur biologique rotatif"
+                    "name": "Boues activées avec mesure de débit à  l'effluent",
+                    "value": null
                 }
             ]
         },
         {
             "name": "Dégrillage",
-            "children": [
+            "children": [{
+                "name": "Dégrilleur fin",
+                "value": 625.4807692
+            }]
+        },
+        {
+            "name": "Disques biologiques",
+            "children": [{
+                    "name": "Disques biologiques",
+                    "value": 177.5
+                },
                 {
-                    "value": 32525.0,
-                    "name": "Dégrilleur fin"
+                    "name": "Disques biologiques à  réacteur biologique rotatif",
+                    "value": 510
+                },
+                {
+                    "name": "Disques biologiques Rotofix",
+                    "value": null
+                },
+                {
+                    "name": "Disques biologiques Rotolyne",
+                    "value": null
                 }
             ]
         },
         {
-            "name": "Fosse septique",
-            "children": [
+            "name": "Étangs aérés (EA.)",
+            "children": [{
+                    "name": "EA.",
+                    "value": 2519.720756
+                },
                 {
-                    "value": 3635.0,
-                    "name": "Fosse septique"
+                    "name": "EA. à  parois verticales",
+                    "value": 224.5294118
+                },
+                {
+                    "name": "EA. à  réacteur biologique avec lit en mouvement",
+                    "value": 2303.45
+                },
+                {
+                    "name": "EA. avec bassin complètement mélangé",
+                    "value": 245.7333333
+                },
+                {
+                    "name": "EA. avec infiltration",
+                    "value": null
                 }
             ]
         },
         {
-            "name": "Physico-chimique",
-            "children": [
-                {
-                    "value": 10445378.0,
-                    "name": "Physico-chimique"
-                }
-            ]
-        },
-        {
-            "name": "Étangs aérés",
-            "children": [
-                {
-                    "value": 23867063.0,
-                    "name": "Étangs aérés"
+            "name": "EA. à  rétention réduite",
+            "children": [{
+                    "name": "EA. à  rétention réduite",
+                    "value": 92.22222222
                 },
                 {
-                    "value": 3686.0,
-                    "name": "Étangs aérés avec bassin complètement mélangé"
-                },
-                {
-                    "value": 26719.0,
-                    "name": "Étangs aérés à parois verticales"
-                },
-                {
-                    "value": 46069.0,
-                    "name": "Étangs aérés à réacteur biologique avec lit en mouvement"
-                }
-            ]
-        },
-        {
-            "name": "Étangs aérés à rétention réduite",
-            "children": [
-                {
-                    "value": 830.0,
-                    "name": "Étangs aérés à rétention réduite"
-                },
-                {
-                    "value": 10048.0,
-                    "name": "Étangs aérés à rétention réduite à parois verticales"
+                    "name": "EA. à  rétention réduite à  parois verticales",
+                    "value": 145.6231884
                 }
             ]
         },
         {
             "name": "Étangs non aérés",
-            "children": [
-                {
-                    "value": 12166.0,
-                    "name": "Étangs non aérés et filtre"
+            "children": [{
+                    "name": "Étangs non aérés à  décharge en continu",
+                    "value": null
                 },
                 {
-                    "value": 1802.0,
-                    "name": "Étangs non aérés à décharge en continu"
+                    "name": "Étangs non aérés à  vidange périodique",
+                    "value": 185.3333333
                 },
                 {
-                    "value": 7784.0,
-                    "name": "Étangs non aérés à vidange périodique"
+                    "name": "Étangs non aérés avec mesure de débit à  l'effluent",
+                    "value": null
+                },
+                {
+                    "name": "Étangs non aérés et filtre",
+                    "value": 357.8235294
                 }
             ]
+        },
+        {
+            "name": "Fosse septique",
+            "children": [{
+                "name": "Fosse septique",
+                "value": 134.6296296
+            }]
+        },
+        {
+            "name": "Physico-chimique",
+            "children": [{
+                "name": "Physico-chimique",
+                "value": 2910.386737
+            }]
         }
     ]
 }

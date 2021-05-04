@@ -1,122 +1,160 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="Description" content="Code pour le TP3 de INF8808.">
-        <title>TP3 | INF8808</title>
-        <link rel="stylesheet" href="assets/style.css">
-        <link rel="stylesheet" href="assets/typography.css">
 
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-        <script type="text/javascript" src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://unpkg.com/fullpage.js/dist/fullpage.css" />
-      </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Description" content="Projet Cours INF8808.">
+    <title>PROJET | INF8808</title>
+    <link rel="shortcut icon" href="../favicon-32x32.png">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/typography.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script type="text/javascript" src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/fullpage.js/dist/fullpage.css" />
 
-      <body>
-       <div id="fullpage">
+</head>
+
+<body>
+    <div id="fullpage">
         <div class="section" id="section0">
-          <div class="intro">
-            <header>
-              <h1>
-                Les stations d'épurations et leurs débordements au Québec
-              </h1>
-              <h2>
-                From 2017 to 2019
-              </h2>
-            </header>
-            <div style="display: flex; height:100%">
-              <div id='map'></div>
-              <div id="div-metric-modal">
-                <input type="checkbox" name="myCheckBox" checked>
-                <label for="myCheckBox">Station d'épuration</label>
-                <input type="checkbox" name="myCheckBox2" checked>
-                <label for="myCheckBox2">Intensité des débordements sur les municipalités</label>
-
-              <div id='metric-modal'></div>
+            <div class="intro">
+                <header>
+                    <h1>
+                        Les stations d'épurations et leurs débordements au Québec
+                    </h1>
+                    <h2>
+                        De 2017 à 2019
+                    </h2>
+                </header>
+                <div style="display: flex; height:90%">
+                    <div style="width: 70%">
+                        <div style="margin-bottom:10px; display: flex; justify-content: space-evenly;">
+                            <div>
+                                <input type="checkbox" id="cb_step" name="step" checked>
+                                <label for="step">Station d'épuration</label>
                             </div>
-              </div>
-            </div>
-        </div>
-        <div class="section" id="section1">            
-          <header>
-              <h1>
-                Le top-50 des riviéres par rapport au débordements des eaux usées au Québec
-              </h1>
-              <h2>
-                From 2011 to 2019
-              </h2>
-          </header>
-          <div style="height:100%">
-            <div class='heatmap'style="height:100%"></div>
-          </div>
-        </div>
-        <div class="section" id="section2">
-          <header>
-              <h1>
-                Les répartions des débordements
-              </h1>
-              <h2>
-                From 2017 to 2019
-              </h2>
-          </header>
-          <div style="
-                    display: flex;
-                    flex-wrap: wrap;
-                    flex-direction: row;
-                    height: 100%;
-                    /* justify-items: center; */
-                    align-content: stretch;
-                    justify-content: space-around;
-                    align-items: stretch;
-            ">
-          <div>
-          <h2 style="font-size:20px"> Le volume de débordements par technique de traitement:</h2>
-            <div id='canvasTreemap'></div>
-          </div>
-          <div>
-          
-          <h2 style="font-size:20px"> Le volume de débordements par STEP:</h2>
-            <div id='canvasTreemap2'></div>
-          </div>
-          </div>
-        </div>
-        <div class="section" id="section3">
-          <header>
-          <h1>
-            Les contextes des surverses au cours du temps
-          </h1>
-              <h2>
-                From 2017 to 2019
-              </h2>
-        </header>
-        <main>
-        <div class='panel'>
-          <div class="viz-container">
-            <div class="graph" id="bar-chart">
-            </div>
-          </div>
-        </main>
-        </div>
-    </div>
-        <script src="https://d3js.org/d3.v5.js"></script>
-        <script type="text/javascript" src="https://alvarotrigo.com/fullPage/fullpage.extensions.min.js"></script>
-        <script type="module" src="index.js"></script>
-        <script type="text/javascript">
-          new fullpage('#fullpage', {
-            sectionsColor: ['whitesmoke', 'whitesmoke', 'whitesmoke', 'whitesmoke', 'whitesmoke'],
-            anchors: ['firstPage', 'secondPage', '3rdPage', '4thPage', '5thPage'],
-              navigationTooltips: ['fullPage', 'Open', 'Easy', 'Touch'],
-              css3: true,
-              scrollingSpeed: 1000,
-              navigation: true,
-              slidesNavigation: true,
-              responsiveHeight: 330,
-              dragAndMove: true,
-              dragAndMoveKey: 'YWx2YXJvdHJpZ28uY29tX0EyMlpISmhaMEZ1WkUxdmRtVT0wWUc=',
-              controlArrows: false
-          });
-        </script>
+                            <div>
+                                <input type="checkbox" id="cb_choropleth" name="choropleth" checked>
+                                <label for="choropleth">Intensité des débordements</label>
+                            </div>
+                        </div>
 
-      </body>
+                        <div id="map"></div>
+                    </div>
+
+                    <div id="div-metric-modal">
+                        <div id="filters">
+                            <div style="margin-bottom:10px; display: flex; justify-content: space-between;">
+                                <label for="region">Région</label>
+                                <select style="width: 70%;" id="region" name="region"></select>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <label for="mrc">Municipalité</label>
+                                <select style="width: 70%;" id="mrc" name="mrc"></select>
+                            </div>
+                        </div>
+                        <div id="metric-modal"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="section1">
+            <header>
+                <h1>
+                    Le top-50 des riviéres par rapport au débordements des eaux usées au Québec
+                </h1>
+                <h2>
+                    De 2011 à 2019
+                </h2>
+            </header>
+            <div style="height:100%">
+                <div class="heatmap" style="height:100%"></div>
+            </div>
+        </div>
+
+        <div class="section" id="section2">
+            <header>
+                <h1>
+                    Les répartions des débordements
+                </h1>
+                <h2>
+                    De 2017 à 2019
+                </h2>
+            </header>
+            <div style="
+                      display: flex;
+                      flex-wrap: wrap;
+                      flex-direction: row;
+                      height: 100%;
+                      /* justify-items: center; */
+                      align-content: stretch;
+                      justify-content: space-around;
+                      align-items: stretch;
+              ">
+                <div>
+                    <h2 style="font-size:20px"> Le volume de débordements par technique de traitement:</h2>
+                    <div id="canvasTreemap"></div>
+                </div>
+                <div>
+
+                    <h2 style="font-size:20px"> Le volume de débordements par STEP:</h2>
+                    <div id="canvasTreemap2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="section3">
+            <header>
+                <h1>
+                    Les contextes des surverses au cours du temps
+                </h1>
+                <h2>
+                    De 2017 à 2019
+                </h2>
+            </header>
+            <div class="panel">
+                <div class="viz-container" style="height: 100%;">
+                    <div class="graph" id="stacked-bar-chart">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="section4">
+            <header>
+                <h1>
+                    Les débordements par catégorie de suivi
+                </h1>
+                <h2>
+                    De 2017 à 2019
+                </h2>
+            </header>
+            <div class="panel">
+                <div class="viz-container" style="height: 100%;">
+                    <div class="graph" id="bar-chart">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://d3js.org/d3.v5.js"></script>
+        <script type="module" src="index.js"></script>
+        <script type="text/javascript" src="https://alvarotrigo.com/fullPage/fullpage.extensions.min.js"></script>
+        <script type="text/javascript">
+            new fullpage('#fullpage', {
+                sectionsColor: ['whitesmoke', 'whitesmoke', 'whitesmoke', 'whitesmoke', 'whitesmoke'],
+                anchors: ['firstPage', 'secondPage', '3rdPage', '4thPage', '5thPage'],
+                navigationTooltips: ['fullPage', 'Open', 'Easy', 'Touch'],
+                css3: true,
+                scrollingSpeed: 1000,
+                navigation: true,
+                slidesNavigation: true,
+                responsiveHeight: 330,
+                dragAndMove: true,
+                dragAndMoveKey: 'YWx2YXJvdHJpZ28uY29tX0EyMlpISmhaMEZ1WkUxdmRtVT0wWUc=',
+                controlArrows: false
+            });
+        </script>
+</body>
+
 </html>

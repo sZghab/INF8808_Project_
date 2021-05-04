@@ -1,65 +1,45 @@
-/**
- * Sets up an event handler for when the mouse enters and leaves the squares
- * in the heatmap. When the square is hovered, it enters the "selected" state.
- *
- * The tick labels for the year and neighborhood corresponding to the square appear
- * in bold.
- *
- * @param {*} xScale The xScale to be used when placing the text in the square
- * @param {*} yScale The yScale to be used when placing the text in the square
- * @param {Function} rectSelected The function to call to set the mode to "selected" on the square
- * @param {Function} rectUnselected The function to call to remove "selected" mode from the square
- * @param {Function} selectTicks The function to call to set the mode to "selected" on the ticks
- * @param {Function} unselectTicks The function to call to remove "selected" mode from the ticks
- */
-export function setRectHandler (xScale, yScale, rectSelected, rectUnselected, selectTicks, unselectTicks) {
-  // TODO : Select the squares and set their event handlers
-}
+export function setStationPopupHandler(map) {
 
-/**
- * The function to be called when one or many rectangles are in "selected" state,
- * meaning they are being hovered or the tick label for their neighborhood
- * or year is hovered.
- *
- * The text representing the number of trees associated to the rectangle
- * is displayed in the center of the rectangle and their opacity is lowered to 75%.
- *
- * @param {*} element The selection of rectangles in "selected" state
- * @param {*} xScale The xScale to be used when placing the text in the square
- * @param {*} yScale The yScale to be used when placing the text in the square
- */
-export function rectSelected (element, xScale, yScale) {
-  // TODO : Display the number of trees on the selected element
-  // Make sure the nimber is centered. If there are 1000 or more
-  // trees, display the text in white so it contrasts with the background.
-}
+    var popup = L.popup();
+    d3.selectAll("circle")
+        .on('mouseover', function(d) { //function to add mouseover event
+            // Change the cursor style as a UI indicator.
+            d3.select(this).style("cursor", "pointer");
+            d3.select(this).transition() //D3 selects the object we have moused over in order to perform operations on it
+                .duration('150') //how long we are transitioning between the two states (works like keyframes)
+                .attr("fill", "red") //change the fill
+                .attr('r', 10) //change radius
+            var html = "<div style='width: 250px;'> <h3 class='data-label'> Station d'épuration </h3> <div class='step-label'>" + d.properties.name_step.replace("Station d'épuration de ", "").replace("Station d'épuration d'", "") +
+                "</div> <div style='padding:0; margin-top:5px; margin-left:2px;'> <b> Lac principal: </b>" + d.properties.lac +
+                "</div><div style='padding:0; margin-top:5px; margin-left:2px;'> <b> Bassin principal: </b>" + d.properties.nom_bassin + "</div><div class='line'> </div>" + "<div style='display: flex; flex-wrap: wrap;'>" +
+                "<div class = 'popup33container'> <h3 class='data-label'> Débit de traitement </h3> <div class='label-popup-line2'>" +
+                d.properties.débit + " m<sup>3</sup>/jour </div></div>" +
+                "<div class = 'popup33container'> <h3 class='data-label'> Population conception </h3> <div class='label-popup-line2'>" +
+                d.properties.population +
+                "</div></div>" +
+                "<div class = 'popup33container'> <h3 class='data-label'> DBO5C </h3> <div class='label-popup-line2'>" +
+                d.properties.DBO5C +
+                "</div></div>" +
+                "<div class = 'popup33container'> <h3 class='data-label'> Type de traitement </h3> <div class='label-popup-line2'>" +
+                d.properties.type_trait +
+                "</div></div>" +
+                "<div class = 'popup33container'> <h3 class='data-label'> Date mise en service </h3> <div class='label-popup-line2'>" +
+                d.properties.dt_mise_service +
+                "</div></div>" +
+                "<div class = 'popup33container'> <h3 class='data-label'> Nombre d'ouvrages </h3> <div class='label-popup-line2'>" +
+                d.properties.nb_os +
+                "</div></div></div>"
+            popup.setLatLng([d.geometry.coordinates[1], d.geometry.coordinates[0]]).setContent(html).openOn(map);
 
-/**
- * The function to be called when the rectangle or group
- * of rectangles is no longer in "selected state".
- *
- * The text indicating the number of trees is removed and
- * the opacity returns to 100%.
- *
- * @param {*} element The selection of rectangles in "selected" state
- */
-export function rectUnselected (element) {
-  // TODO : Unselect the element
-}
+        })
+        .on('mouseout', function() { //reverse the action based on when we mouse off the the circle
+            d3.select(this).style("cursor", "default");
 
-/**
- * Makes the font weight of the ticks texts with the given name and year bold.
- *
- * @param {string} name The name of the neighborhood associated with the tick text to make bold
- * @param {number} year The year associated with the tick text to make bold
- */
-export function selectTicks (name, year) {
-  // TODO : Make the ticks bold
-}
+            d3.select(this).transition()
+                .duration('150')
+                .attr("fill", "steelblue")
+                .attr('r', 5)
 
-/**
- * Returns the font weight of all ticks to normal.
- */
-export function unselectTicks () {
-  // TODO : Unselect the ticks
+            popup.remove()
+        });
 }

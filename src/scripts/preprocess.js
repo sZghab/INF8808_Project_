@@ -4,10 +4,9 @@
  * @param {object[]} data The data to analyze
  * @returns {string[]} The names of the neighorhoods in the data set
  */
-export function getRiverNames(data) {
-    // TODO: Return the neihborhood names
-    const listOfArrond = [...new Set(data.map(it => it["Lac/Cours d'eau (milieu récepteur)"]))];
-    return listOfArrond
+export function getNeighborhoodNames (data) {
+  // TODO: Return the neihborhood names
+  return []
 }
 
 /**
@@ -18,10 +17,9 @@ export function getRiverNames(data) {
  * @param {number} end The end year (inclusive)
  * @returns {object[]} The filtered data
  */
-export function filterYears(data, start, end) {
-    // TODO : Filter the data by years
-    let res = data.filter(function(it) { return new Date(it.Date_Plantation).getFullYear() >= start && new Date(it.Date_Plantation).getFullYear() <= end });
-    return res
+export function filterYears (data, start, end) {
+  // TODO : Filter the data by years
+  return []
 }
 
 /**
@@ -31,26 +29,9 @@ export function filterYears(data, start, end) {
  * @returns {object[]} A table of objects with keys 'Arrond_Nom', 'Plantation_Year' and 'Counts', containing
  * the name of the neighborhood, the year and the number of trees that were planted
  */
-export function summarizeYearlyCounts(data) {
-    // TODO : Construct the required data table
-
-    var series = d3.nest()
-        .key(function(d) { return d["Lac/Cours d'eau (milieu récepteur)"] })
-        .key(function(d) { return new Date(d["Date de début du débordement"]).getFullYear() })
-        .entries(data)
-    if (series !== null && Object.keys(series).length >= 1) {
-        var res = []
-        series.forEach(arr => {
-            arr.values.forEach(year => {
-                res.push({
-                    lac: arr.key,
-                    year: Number(year.key),
-                    Comptes: year.value.Count
-                })
-            })
-        })
-    }
-    return res
+export function summarizeYearlyCounts (data) {
+  // TODO : Construct the required data table
+  return []
 }
 
 /**
@@ -65,26 +46,7 @@ export function summarizeYearlyCounts(data) {
  * @returns {object[]} The data set with a new object for missing year and neighborhood combinations,
  * where the values for 'Counts' is 0
  */
-export function fillMissingData(data, neighborhoods, start, end, range) {
-    // TODO : Find missing data and fill with 0
-    let res = []
-    range(start, end).forEach(year => {
-        neighborhoods.forEach(neighborhood => {
-            let item = data.find(el => el.Arrond_Nom === neighborhood && el.Plantation_Year === year);
-            if (item == undefined) {
-                res.push({
-                    Arrond_Nom: neighborhood,
-                    Plantation_Year: year,
-                    Comptes: 0
-                })
-            } else {
-                res.push({
-                    Arrond_Nom: neighborhood,
-                    Plantation_Year: year,
-                    Comptes: item.Comptes
-                })
-            }
-        });
-    });
-    return res
+export function fillMissingData (data, neighborhoods, start, end, range) {
+  // TODO : Find missing data and fill with 0
+  return []
 }

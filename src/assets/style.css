@@ -1,184 +1,209 @@
-   .intro {
-       height: 100%;
-   }
-   
-   header {
-       background-color: #fff;
-       padding: 10px 100px;
-       border-bottom: 2px solid #97939A;
-   }
-   
-   h1 {
-       color: #2A2B2E;
-       font-family: 'Roboto Slab', 'serif';
-       font-size: 30px;
-       margin: 0;
-       font-weight: normal;
-   }
-   
-   h2 {
-       color: #2A2B2E;
-       font-size: 15px;
-       font-family: 'Roboto Slab', 'serif';
-       font-weight: normal;
-   }
-   
-   #map {
-       height: 83%;
-       width: 70%;
-       margin: 5px;
-   }
-   
-   .legend {
-       line-height: 18px;
-       color: #555;
-       padding: 0;
-   }
-   
-   .legend i {
-       width: 18px;
-       height: 18px;
-       float: left;
-       margin-right: 8px;
-       opacity: 0.7;
-       padding: 5px;
-       margin-right: 100px;
-   }
-   
-   .legend-text {
-       width: 150px;
-       margin-left: 30px;
-   }
-   
-   .info {
-       padding: 6px 8px;
-       font: 14px/16px Arial, Helvetica, sans-serif;
-       background: white;
-       background: rgba(255, 255, 255, 0.8);
-       box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-       border-radius: 5px;
-   }
-   
-   .leaflet-popup-content {
-       width: auto !important;
-   }
-   
-   .step-label {
-       color: #007FBF;
-       font-family: "Open Sans";
-       font-size: 17px;
-       font-weight: bold;
-       letter-spacing: 0;
-       line-height: 1.2em;
-   }
-   
-   .data-label {
-       color: #82949F;
-       font-family: "Open Sans";
-       font-size: 12px;
-       letter-spacing: 0;
-       line-height: 18px;
-       font-weight: 500;
-       margin-bottom: 0;
-   }
-   
-   .line {
-       margin-top: 10px;
-       height: 1px;
-       background-color: #ededed94;
-       width: 100%;
-   }
-   
-   .popup33container {
-       width: 30%;
-       min-width: 50px;
-       padding: 2px;
-       display: flex;
-       flex-direction: column;
-       justify-content: space-between;
-   }
-   
-   .label-popup-line2 {
-       color: #00365B;
-       font-family: "Open Sans";
-       font-size: 13px;
-       letter-spacing: 0;
-       line-height: 18px;
-       font-weight: 600;
-   }
-   
-   #div-metric-modal {
-       height: 100%;
-       width: 50%;
-       background-color: white;
-       margin: 5px;
-   }
-   
-   #metric-modal {
-       height: 100%;
-       width: 100%;
-   }
-   
-   body {
-       background: #FFF url("https://i.imgur.com/KheAuef.png") top left repeat-x;
-       font-family: 'Alex Brush', cursive !important;
-   }
-   
-   .page {
-       display: none;
-       padding: 0 0.5em;
-   }
-   
-   .page h1 {
-       font-size: 2em;
-       line-height: 1em;
-       margin-top: 1.1em;
-       font-weight: bold;
-   }
-   
-   .page p {
-       font-size: 1.5em;
-       line-height: 1.275em;
-       margin-top: 0.15em;
-   }
-   
-   #loading {
-       display: block;
-       position: absolute;
-       top: 0;
-       left: 0;
-       z-index: 100;
-       width: 100vw;
-       height: 100vh;
-       background-color: rgba(192, 192, 192, 0.5);
-       background-image: url("https://i.stack.imgur.com/MnyxU.gif");
-       background-repeat: no-repeat;
-       background-position: center;
-   }
-   
-   .section {
-       display: flex !important;
-   }
-   
-   .panel {
-       margin-top: 80px;
-   }
-   
-   .legendSequential {
-       font-family: "Open Sans";
-       font-size: 13px;
-   }
-   
-   #canvasTreemap {
-       margin-top: 10px;
-       font-size: 5px;
-       height: 100%;
-       width: 100%;
-   }
-   
-   #canvasTreemap2 {
-       margin-top: 10px;
-       font-size: 10px;
-       height: 100%;
-       width: 100%;
-   }
+.intro {
+    height: 100%;
+}
+
+header {
+    background-color: #fff;
+    padding: 10px 100px;
+    border-bottom: 2px solid #97939A;
+}
+
+h1 {
+    color: #2A2B2E;
+    font-family: 'Roboto Slab', 'serif';
+    font-size: 30px;
+    margin: 0;
+    font-weight: normal;
+}
+
+h2 {
+    color: #2A2B2E;
+    font-size: 15px;
+    font-family: 'Roboto Slab', 'serif';
+    font-weight: normal;
+}
+
+#map {
+    height: 90%;
+    width: 100%;
+    margin: 5px;
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+    padding: 0;
+}
+
+.legend i {
+    width: 10px;
+    height: 10px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+    padding: 5px;
+    margin-right: 100px;
+}
+
+.legend-text {
+    width: 150px;
+    margin-left: 30px;
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px 'Roboto Slab', 'serif';
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.leaflet-popup-content {
+    width: auto !important;
+}
+
+.step-label {
+    color: #007FBF;
+    font-family: 'Roboto Slab', 'serif';
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 1.2em;
+}
+
+.data-label {
+    color: #82949F;
+    font-family: 'Roboto Slab', 'serif';
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 18px;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.line {
+    margin-top: 10px;
+    height: 1px;
+    background-color: #ededed94;
+    width: 100%;
+}
+
+.popup33container {
+    width: 30%;
+    min-width: 50px;
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.label-popup-line2 {
+    color: #00365B;
+    font-family: 'Roboto Slab', 'serif';
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: 18px;
+    font-weight: 600;
+}
+
+#filters {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#div-metric-modal {
+    height: 100%;
+    width: 50%;
+    background-color: white;
+    margin: 5px;
+}
+
+#metric-modal {
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+}
+
+body {
+    background: #FFF url("https://i.imgur.com/KheAuef.png") top left repeat-x;
+    font-family: 'Roboto Slab', 'serif' !important;
+}
+
+.page {
+    display: none;
+    padding: 0 0.5em;
+}
+
+.page h1 {
+    font-size: 2em;
+    line-height: 1em;
+    margin-top: 1.1em;
+    font-weight: bold;
+}
+
+.page p {
+    font-size: 1.5em;
+    line-height: 1.275em;
+    margin-top: 0.15em;
+}
+
+#loading {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(192, 192, 192, 0.5);
+    background-image: url("https://i.stack.imgur.com/MnyxU.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.section {
+    display: flex !important;
+}
+
+.panel {
+    height: 75%;
+    margin-top: 50px;
+}
+
+.tick {
+    font: 12px/14px 'Roboto Slab', 'serif';
+}
+
+.legendSequential {
+    font-family: 'Roboto Slab', 'serif';
+    font-size: 13px;
+}
+
+#canvasTreemap {
+    margin-top: 10px;
+    font-size: 5px;
+    height: 100%;
+    width: 100%;
+}
+
+#canvasTreemap2 {
+    margin-top: 10px;
+    font-size: 10px;
+    height: 100%;
+    width: 100%;
+}
+
+#stacked-bar-chart {
+    height: 100%;
+}
+
+#bar-chart {
+    height: 100%;
+}
+
+.legendTitle {
+    font-size: 15px;
+    font-weight: bolder;
+}

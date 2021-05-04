@@ -1,4 +1,3 @@
-import * as map from '../scripts/map'
 import d3Legend from 'd3-svg-legend'
 
 export function secondTreemap(data) {
@@ -30,7 +29,7 @@ export function secondTreemap(data) {
     )
 
     d3.treemap()
-        .size([width - 120, height]).padding(2).round(true)
+        .size([width - 150, height]).padding(2).round(true)
         (hierarchy)
 
     let dataTiles = hierarchy.leaves()
@@ -45,7 +44,7 @@ export function secondTreemap(data) {
 
     canvas.append("g")
         .attr("class", "legendSequential")
-        .attr("transform", "translate(" + (width - 120) + ", 20 )");
+        .attr("transform", "translate(" + (width - 150) + ", 20 )");
 
     var color = d3.scaleOrdinal()
         .domain(['Très petite', 'Petite', 'Moyenne', 'Grande', 'Très grande'])
@@ -57,7 +56,7 @@ export function secondTreemap(data) {
         .orient("vertical")
         .scale(color)
         .labelAlign('start')
-        .title('Légende')
+        .title('Taille des stations: ')
 
     canvas.select(".legendSequential")
         .call(legendSequential);
@@ -95,18 +94,10 @@ export function secondTreemap(data) {
 
             let revenue = data['data']['value'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
-            // d3.select('#tooltip2')
-            //     .html(revenue + ' m³ ' + '<hr />' + data['data']['name'])
-            //     .style('visibility', 'visible')
-            //     .style('opacity',0.85)
-            //     .style('left', (d3.event.pageX)+'px')
-            //     .style('top', (d3.event.pageY)+'px')
-
             tooltip2.html(
-                revenue + ' m³ ' + '<hr />' + data['data']['name']
+                "<b> Station d'épuration: </b>" + data['data']['name'] +
+                "</br><b> Volume des débordements: </b>" + revenue + ' m³ '
             )
-
-            tooltip2.attr('data-value', data['data']['value'])
         })
         .on("mousemove", function() { return tooltip2.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px"); })
         .on('mouseout', (data) => {
@@ -116,8 +107,7 @@ export function secondTreemap(data) {
         })
 
     var format = d3.format(",d")
-    var kx = width / root.dx,
-        ky = height / 1;
+    var ky = height / 1;
 
     block.append("text")
         .selectAll("tspan")
@@ -129,5 +119,21 @@ export function secondTreemap(data) {
         })
         .attr("opacity", function(d) { return d.dx * ky > 10 ? 1 : 0; })
         .text((d, i, nodes) => d);
+
+    block.append("text")
+        .selectAll("tspan")
+        .data(d => {
+            if (d.data.value > 600000) {
+                return d.data.name.split("(")[0].split(/(?=[A-Z][a-z])/g).concat(format(d.value))
+            } else {
+                return "."
+            }
+        })
+        .join("tspan")
+        .attr("font-size", "5px")
+        .attr("x", 2)
+        .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.5 + 1.1 + i * 0.8}em`)
+        .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
+        .text(d => d);
 
 }
